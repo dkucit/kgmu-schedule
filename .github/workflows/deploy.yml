@@ -28,8 +28,6 @@ jobs:
       - name: Свежее расписание с сайта КГМУ
         working-directory: app
         run: python scraper/build.py || echo "::warning::Сайт КГМУ недоступен, публикую данные из архива"
-      - working-directory: app
-        run: python scraper/wrap.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: app/site
