@@ -1,0 +1,5 @@
+raw/
+__pycache__/
+.env
+bot/data/
+*.sqlite3
