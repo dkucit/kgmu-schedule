@@ -150,8 +150,21 @@ def compact(ev):
     return ev
 
 
+class BuildRejected(Exception):
+    pass
+
+
+def write_status(out_dir: Path, ok: bool, message: str, problems=None):
+    out_dir.mkdir(parents=True, exist_ok=True)
+    st = {"ok": ok, "message": message, "problems": problems or [],
+          "at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
+    (out_dir / "status.json").write_text(json.dumps(st, ensure_ascii=False, indent=1), "utf-8")
+    print(("✓ " if ok else "✗ ") + message)
+
+
 def build(raw_dir: Path, out_dir: Path, manifest):
     out_dir.mkdir(parents=True, exist_ok=True)
+    problems = []
     start, sem_label = semester_start(raw_dir, manifest)
     facs = {}
     for m in manifest:
@@ -169,7 +182,10 @@ def build(raw_dir: Path, out_dir: Path, manifest):
             _, res, kind = parse_file(raw_dir / m["fn"])
         except Exception as e:  # noqa: BLE001
             print(f"  ! не удалось разобрать {m['fn']}: {e}")
+            problems.append(f"{m['prog']} / {m['label']}: файл {m['fn']} не разобран ({e})")
             continue
+        if not res:
+            problems.append(f"{m['prog']} / {m['label']}: в файле {m['fn']} не найдено ни одной группы")
         for g, v in res.items():
             slot = fac["groups"].setdefault(g, {"course": v["course"], "ev": [], "src": []})
             slot["course"] = slot["course"] or v["course"]
@@ -187,6 +203,17 @@ def build(raw_dir: Path, out_dir: Path, manifest):
                     uniq.append(e)
             uniq.sort(key=lambda e: (e.get("date", ""), e.get("d", 9), e.get("s", "")))
             v["ev"] = uniq
+    # защита от поломки: если групп стало намного меньше — не перезаписываем данные
+    new_count = sum(len(f["groups"]) for f in facs.values())
+    old_index = out_dir / "index.json"
+    if old_index.exists():
+        old = json.loads(old_index.read_text("utf-8"))
+        old_count = sum(len(g) for f in old["faculties"] for g in f["courses"].values())
+        if old_count and new_count < old_count * 0.7:
+            raise BuildRejected(f"Групп после разбора стало {new_count} вместо {old_count}. "
+                                f"Похоже, вуз поменял формат таблиц — оставляю прошлые данные.", problems)
+    if new_count == 0:
+        raise BuildRejected("Не удалось разобрать ни одной группы — оставляю прошлые данные.", problems)
     order = [x[0] for x in FACULTY_META]
     index = {"updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
              "semester": sem_label, "weekStart": start, "source": PAGE, "holidays": sorted(HOLIDAYS), "faculties": []}
@@ -205,6 +232,7 @@ def build(raw_dir: Path, out_dir: Path, manifest):
                                    "hash": hashlib.md5(body.encode()).hexdigest()[:10]})
         print(f"  {fid:5} {fac['name']}: {len(fac['groups'])} групп, {len(body)//1024} KB")
     (out_dir / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), "utf-8")
+    write_status(out_dir, not problems, f"Обновлено: {new_count} групп" + (f", проблем: {len(problems)}" if problems else ""), problems)
     return index
 
 
@@ -213,11 +241,25 @@ if __name__ == "__main__":
     ap.add_argument("--offline", metavar="RAW_DIR", help="не скачивать, взять файлы из папки")
     ap.add_argument("--out", default=str(ROOT / "site" / "data"))
     a = ap.parse_args()
-    if a.offline:
-        raw = Path(a.offline)
-        man = json.loads((raw / "manifest.json").read_text("utf-8"))
-    else:
-        raw = ROOT / "raw"
-        print("Скачиваю расписание с", PAGE)
-        man = fetch_all(raw)
-    build(raw, Path(a.out), man)
+    out = Path(a.out)
+    try:
+        if a.offline:
+            raw = Path(a.offline)
+            man = json.loads((raw / "manifest.json").read_text("utf-8"))
+        else:
+            raw = ROOT / "raw"
+            print("Скачиваю расписание с", PAGE)
+            man = fetch_all(raw)
+            if not man:
+                raise BuildRejected("На странице расписания КГМУ не нашлось ни одной ссылки на файлы — возможно, страницу переделали.", [])
+    except BuildRejected as e:
+        write_status(out, False, e.args[0], e.args[1] if len(e.args) > 1 else [])
+        sys.exit(1)
+    except Exception as e:  # noqa: BLE001
+        write_status(out, False, f"Не удалось скачать расписание с сайта КГМУ: {e}")
+        sys.exit(1)
+    try:
+        build(raw, out, man)
+    except BuildRejected as e:
+        write_status(out, False, e.args[0], e.args[1])
+        sys.exit(1)

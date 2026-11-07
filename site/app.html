@@ -182,6 +182,21 @@ footer a{color:var(--muted)}
 .w-note{color:var(--faint);font-size:12.5px}
 .tgbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 14px;border-radius:var(--r);border:1px dashed var(--accent);margin-bottom:14px;color:var(--muted);font-size:13.5px}
 .tgbar .chip{color:var(--ink)}
+.sgsel{display:inline-flex;align-items:center;gap:2px;padding:2px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:12px;color:var(--muted)}
+.sgsel span{padding:0 6px 0 8px;font-weight:600}
+.sgsel button{padding:2px 9px;border-radius:999px;font-weight:600;font-size:12px;color:var(--muted)}
+.sgsel button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+a.maplink{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 55%,transparent);text-underline-offset:3px}
+a.maplink:hover{color:var(--accent)}
+.backpill{color:var(--accent);border-color:var(--accent);cursor:pointer}
+.ptabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px}
+.ptabs button{flex:1;padding:8px 6px;border-radius:9px;font-weight:600;font-size:13px;color:var(--muted)}
+.ptabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.rlist{display:flex;flex-direction:column;gap:6px}
+.ritem{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.ritem:hover{border-color:var(--accent)}
+.ritem b{font-weight:600;overflow-wrap:anywhere}
+.ritem span{color:var(--faint);font-size:12.5px;white-space:nowrap}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;box-shadow:var(--shadow)}
 </style>
 
@@ -239,7 +254,8 @@ footer a{color:var(--muted)}
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pickTitle">
     <div class="panel-h">
       <div class="ttl"><h2 id="pickTitle">Выбор группы</h2><button class="icon-btn" id="closeSheet" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" inputmode="numeric" placeholder="Номер группы, например 1201" autocomplete="off"></label>
+      <div class="ptabs" role="group" aria-label="Что искать"><button data-pm="g" aria-pressed="true">Группа</button><button data-pm="t" aria-pressed="false">Преподаватель</button><button data-pm="r" aria-pressed="false">Аудитория</button></div>
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Номер группы, например 1201" autocomplete="off"></label>
     </div>
     <div class="panel-b" id="pickBody"></div>
   </div>
@@ -255,6 +271,7 @@ const KIND={lec:"Лекция",pr:"Практика",cyc:"Цикл",pe:"Физк
 const ICON={
   user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
   pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  group:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c1-3.4 3.3-5 6-5s5 1.6 6 5M15 15.2c2.6-.4 4.6 1 5.5 3.8"/></svg>',
   star:'<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>'
 };
 const store={get(k,d){try{const v=localStorage.getItem("kgmu."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("kgmu."+k,JSON.stringify(v))}catch(e){}}};
@@ -268,7 +285,7 @@ const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const n1=n%10;return n>10&&n<20?c:n1>
 const tr={"и":"i","П":"P","м":"m","н":"n","а":"a","М":"M","Н":"N"};
 const slug=g=>String(g).replace(/./g,c=>tr[c]??c).replace(/[^A-Za-z0-9-]/g,"");
 
-let INDEX=null, FAC={}, state={fac:null,group:null,date:new Date(),view:store.get("view","day")};
+let INDEX=null, FAC={}, state={fac:null,group:null,date:new Date(),view:store.get("view","day"),subj:null};
 const now=()=>new Date();
 
 async function loadIndex(){
@@ -293,6 +310,52 @@ function eventsFor(fid,g,date){
   if((INDEX.holidays||[]).includes(ds)) return [];
   return data.groups[g].ev.filter(e=>e.date? e.date===ds : (e.d===wd && (!e.w||e.w.includes(w)))).sort((a,b)=>mins(a.s)-mins(b.s)||mins(a.e)-mins(b.e));
 }
+/* подгруппа */
+const sgKey=()=>"sg."+state.fac+"."+state.group;
+const mySg=()=>store.get(sgKey(),0);
+const hasSg=()=>!!FAC[state.fac]?.groups[state.group]?.ev.some(e=>e.sg);
+/* преподаватель / аудитория */
+async function loadAll(){await Promise.all(INDEX.faculties.filter(f=>Object.keys(f.courses).length).map(f=>loadFac(f.id)))}
+const splitPeople=p=>String(p||"").split(/,\s*(?=[А-ЯЁ])/).map(x=>x.trim()).filter(Boolean);
+let PEOPLE=null, ROOMS=null;
+function buildDirs(){
+  PEOPLE=new Map();ROOMS=new Map();
+  for(const[fid,d] of Object.entries(FAC))for(const[g,v] of Object.entries(d.groups))for(const e of v.ev){
+    for(const n of splitPeople(e.p)) PEOPLE.set(n,(PEOPLE.get(n)||0)+1);
+    if(e.l&&!/^(онлайн|Не назначено)/i.test(e.l)) ROOMS.set(e.l,(ROOMS.get(e.l)||0)+1);
+  }
+}
+const subjCache=new Map();
+function subjEvents(date){
+  const ds=iso(date), wd=(date.getDay()+6)%7, w=weekNo(date), k=state.subj.type+"|"+state.subj.key+"|"+ds;
+  if(subjCache.has(k)) return subjCache.get(k);
+  const out=new Map();
+  if(!(INDEX.holidays||[]).includes(ds))
+  for(const d of Object.values(FAC))for(const[g,v] of Object.entries(d.groups))for(const e of v.ev){
+    if(!(e.date? e.date===ds : (e.d===wd && (!e.w||e.w.includes(w))))) continue;
+    if(state.subj.type==="t"? !splitPeople(e.p).includes(state.subj.key) : e.l!==state.subj.key) continue;
+    const key=[e.s,e.e,e.t,e.l,e.p].join("|");
+    if(!out.has(key)) out.set(key,{...e,_g:[]});
+    const x=out.get(key); if(!x._g.includes(g)) x._g.push(g);
+  }
+  const res=[...out.values()].sort((a,b)=>mins(a.s)-mins(b.s)||mins(a.e)-mins(b.e));
+  subjCache.set(k,res);return res;
+}
+function curEvents(date){
+  if(state.subj) return subjEvents(date);
+  const sg=mySg();
+  return eventsFor(state.fac,state.group,date).filter(e=>!(sg&&e.sg&&e.sg!==sg));
+}
+/* карта */
+const PLACES=[[/^(НУК|Бутлерова,? 49Б)/i,"Казань, улица Бутлерова, 49Б"],[/^ГУК\b/,"Казань, улица Бутлерова, 49"],[/^(ОСЦ|Маяковского)/,"Казань, улица Маяковского, 11/7"],
+  [/^Институт фармации/,"Казань, проспект Амирхана, 16"],[/^Стоматологическая поликлиника КГМУ/,"Казань, улица Бутлерова, 16"],[/^Анатомический театр/,"Казань, Кремлёвская улица, 18"]];
+function mapUrl(l){
+  if(!l||/^(онлайн|ауд\.|Не назначено|каб\.)/i.test(l)) return null;
+  const head=l.split(/,\s*(?:ауд|каб|этаж|уч\.|цокол|\d+ этаж)/i)[0].replace(/^Детский стационар при\s*/,"").replace(/[«»"]/g," ").trim();
+  let q=null;for(const[re,addr] of PLACES) if(re.test(l)){q=addr;break}
+  if(!q) q=(/^(УЛК|Центр|ЦПУ)/.test(head)?"Казанский ГМУ ":"")+head+" Казань";
+  return "https://yandex.ru/maps/43/kazan/?text="+encodeURIComponent(q);
+}
 function slots(evs){
   const out=[];for(const e of evs){const last=out[out.length-1];if(last&&last.s===e.s&&last.e===e.e)last.items.push(e);else out.push({s:e.s,e:e.e,items:[e]})}return out;
 }
@@ -302,9 +365,9 @@ function renderDays(){
   const m=monday(state.date), today=iso(now());
   let h="";
   for(let i=0;i<7;i++){
-    const d=addDays(m,i), n=state.group?eventsFor(state.fac,state.group,d).length:0;
+    const d=addDays(m,i), dayEv=state.group?curEvents(d):[], n=dayEv.length;
     const cls=["day",iso(d)===today?"today":"",iso(d)===iso(state.date)?"sel":"",i===6||!n?"off":""].join(" ");
-    const dots=Array.from({length:Math.min(slots(state.group?eventsFor(state.fac,state.group,d):[]).length,5)},()=>"<i></i>").join("");
+    const dots=Array.from({length:Math.min(slots(dayEv).length,5)},()=>"<i></i>").join("");
     h+=`<button class="${cls}" data-d="${iso(d)}" aria-label="${DOW_FULL[i]}, ${d.getDate()} ${MON[d.getMonth()]}"><span class="dw">${DOW[i]}</span><span class="dn">${d.getDate()}</span><span class="dots">${dots}</span></button>`;
   }
   $("#days").innerHTML=h;
@@ -317,10 +380,10 @@ function card(e,date){
   if(e.sg) tags.push(`<span class="tag plain">${e.sg} подгруппа</span>`);
   if(e.note) tags.push(`<span class="tag plain">${esc(e.note)}</span>`);
   const prog=live?`<div class="prog"><i style="width:${Math.round((cur-mins(e.s))/(mins(e.e)-mins(e.s))*100)}%"></i></div>`:"";
-  return `<article class="card k-${e.k||"pr"}${live?" now":""}${past?" past":""}"><div class="meta">${tags.join("")}</div><h3>${esc(e.t)}</h3>${e.p?`<div class="row">${ICON.user}<span>${esc(e.p)}</span></div>`:""}${e.l?`<div class="row">${ICON.pin}<span>${esc(e.l)}</span></div>`:""}${prog}</article>`;
+  return `<article class="card k-${e.k||"pr"}${live?" now":""}${past?" past":""}"><div class="meta">${tags.join("")}</div><h3>${esc(e.t)}</h3>${e.p&&state.subj?.type!=="t"?`<div class="row">${ICON.user}<span>${esc(e.p)}</span></div>`:""}${e.l?`<div class="row">${ICON.pin}<span>${mapUrl(e.l)?`<a class="maplink" href="${mapUrl(e.l)}" target="_blank" rel="noopener" title="Открыть на карте">${esc(e.l)}</a>`:esc(e.l)}</span></div>`:""}${e._g?`<div class="row">${ICON.group}<span>${e._g.length>8?esc(e._g.slice(0,8).join(", "))+" и ещё "+(e._g.length-8):esc(e._g.join(", "))}</span></div>`:""}${prog}</article>`;
 }
 function dayList(date,compact){
-  const sl=slots(eventsFor(state.fac,state.group,date));
+  const sl=slots(curEvents(date));
   let h="";
   sl.forEach((s,i)=>{
     if(i>0){const gap=mins(s.s)-mins(sl[i-1].e);if(gap>=20&&!compact) h+=`<div class="brk"><span></span><span>Перерыв ${gap>=60?Math.floor(gap/60)+" ч "+(gap%60?gap%60+" мин":""):gap+" мин"}</span></div>`}
@@ -331,7 +394,7 @@ function dayList(date,compact){
 function renderStatus(){
   const el=$("#status"); el.innerHTML="";
   if(state.view!=="day"||iso(state.date)!==iso(now())) return;
-  const sl=slots(eventsFor(state.fac,state.group,state.date)); if(!sl.length) return;
+  const sl=slots(curEvents(state.date)); if(!sl.length) return;
   const t=now(), cur=t.getHours()*60+t.getMinutes();
   const live=sl.find(s=>cur>=mins(s.s)&&cur<mins(s.e)), next=sl.find(s=>mins(s.s)>cur);
   let big,b,sp;
@@ -348,18 +411,25 @@ function renderMain(){
     $("#emptyPick").onclick=openPicker; $("#status").innerHTML=""; renderDays(); return;
   }
   const d=state.date, w=weekNo(d), f=facOf(state.fac);
-  $("#groupLbl").textContent=state.group;
-  $("#brandSub").textContent=`${f.name}${f.sub&&!/факультет/i.test(f.sub)?" · "+f.sub:""} · ${groupCourse(state.fac,state.group)||"?"} курс`;
+  if(state.subj){
+    $("#groupLbl").textContent=state.subj.type==="t"?state.subj.key.split(" ")[0]:state.subj.key.replace(/^.*?ауд\.\s*/,"ауд. ").slice(0,14);
+    $("#brandSub").textContent=(state.subj.type==="t"?"Преподаватель: ":"Аудитория: ")+state.subj.key;
+  } else {
+    $("#groupLbl").textContent=state.group;
+    $("#brandSub").textContent=`${f.name}${f.sub&&!/факультет/i.test(f.sub)?" · "+f.sub:""} · ${groupCourse(state.fac,state.group)||"?"} курс`;
+  }
   renderDays();
   $("#vDay").setAttribute("aria-pressed",state.view==="day");$("#vWeek").setAttribute("aria-pressed",state.view==="week");
-  const wkPill=w>=1?`<span class="pill">${w} неделя · ${w%2?"нечётная":"чётная"}</span>`:`<span class="pill">до начала семестра</span>`;
+  let wkPill=w>=1?`<span class="pill">${w} неделя · ${w%2?"нечётная":"чётная"}</span>`:`<span class="pill">до начала семестра</span>`;
+  if(state.subj) wkPill=`<button class="pill backpill" id="backMine">← Моя группа ${esc(state.group)}</button>`+wkPill;
+  else if(hasSg()){const sg=mySg();wkPill+=`<span class="sgsel" role="group" aria-label="Подгруппа"><span>Подгруппа</span>${[[0,"все"],[1,"1"],[2,"2"]].map(([v,t])=>`<button data-sg="${v}" aria-pressed="${sg===v}">${t}</button>`).join("")}</span>`}
   if(state.view==="day"){
     const isT=iso(d)===iso(now()), tm=iso(d)===iso(addDays(now(),1));
     $("#dayTitle").textContent=isT?"Сегодня":tm?"Завтра":DOW_FULL[(d.getDay()+6)%7];
     const {html,count}=dayList(d,false);
     $("#daySub").innerHTML=`<span>${DOW_FULL[(d.getDay()+6)%7].toLowerCase()}, ${d.getDate()} ${MON[d.getMonth()]}</span>${wkPill}${count?`<span class="pill">${count} ${plural(count,"занятие","занятия","занятий")}</span>`:""}`;
     $("#content").className="list";
-    $("#content").innerHTML=html||`<div class="empty"><div class="em">${(INDEX.holidays||[]).includes(iso(d))?"Праздничный день":d.getDay()===0?"Воскресенье":"Занятий нет"}</div><p>${d.getDay()===0||(INDEX.holidays||[]).includes(iso(d))?"Отдыхайте.":"В этот день у группы "+esc(state.group)+" пар нет."}</p></div>`;
+    $("#content").innerHTML=html||`<div class="empty"><div class="em">${(INDEX.holidays||[]).includes(iso(d))?"Праздничный день":d.getDay()===0?"Воскресенье":"Занятий нет"}</div><p>${d.getDay()===0||(INDEX.holidays||[]).includes(iso(d))?"Отдыхайте.":state.subj?"В этот день занятий нет.":"В этот день у группы "+esc(state.group)+" пар нет."}</p></div>`;
   } else {
     const m=monday(d);
     $("#dayTitle").textContent=`${m.getDate()} ${MON[m.getMonth()]} — ${addDays(m,5).getDate()} ${MON[addDays(m,5).getMonth()]}`;
@@ -380,12 +450,16 @@ function renderFoot(){
 }
 
 /* ---------- picker ---------- */
-let pick={fac:null,course:null}, PQ=null, PB=null;
-function openPicker(){PQ=$("#q");PB=$("#pickBody");pick={fac:state.fac,course:state.fac?groupCourse(state.fac,state.group):null};$("#q").value="";renderPicker();$("#sheet").hidden=false;setTimeout(()=>$("#q").focus(),50)}
+let pick={fac:null,course:null}, PQ=null, PB=null, pmode="g";
+function setPmode(m){pmode=m;document.querySelectorAll(".ptabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pm===m));
+  $("#q").placeholder=m==="g"?"Номер группы, например 1201":m==="t"?"Фамилия преподавателя":"Номер аудитории или корпус, например 323";
+  $("#q").inputMode=m==="g"?"numeric":"text";$("#q").value="";$("#pickTitle").textContent=m==="g"?"Выбор группы":m==="t"?"Расписание преподавателя":"Расписание аудитории";renderPicker();$("#q").focus()}
+function openPicker(){PQ=$("#q");PB=$("#pickBody");pmode="g";document.querySelectorAll(".ptabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pm==="g"));$("#pickTitle").textContent="Выбор группы";$("#q").placeholder="Номер группы, например 1201";pick={fac:state.fac,course:state.fac?groupCourse(state.fac,state.group):null};$("#q").value="";renderPicker();$("#sheet").hidden=false;setTimeout(()=>$("#q").focus(),50)}
 function closePicker(){$("#sheet").hidden=true}
 function grpBtn(fid,g,extra){return `<button class="grp${g===state.group&&fid===state.fac?" cur":""}" data-f="${fid}" data-g="${esc(g)}">${esc(g)}${extra?`<small>${esc(extra)}</small>`:""}</button>`}
 function renderPicker(){
   const q=PQ.value.trim().toLowerCase(), b=PB;
+  if(PB.id==="pickBody"&&pmode!=="g") return renderDirPicker(q,b);
   const favs=store.get("favs",[]).filter(x=>facOf(x.f));
   let h="";
   if(q){
@@ -408,6 +482,25 @@ function renderPicker(){
   b.innerHTML=h;
   if(PB.id==="wBody"){const st=[...document.querySelectorAll("#wSteps li")],lvl=q?2:!pick.fac?0:1;st.forEach((li,i)=>{li.className=i<lvl?"done":i===lvl?"on":"";});if(lvl===1){st[1].className="done";st[2].className="on"}}
 }
+let dirLoading=false;
+async function renderDirPicker(q,b){
+  if(!PEOPLE){
+    b.innerHTML=`<div class="empty"><div class="em">Загружаю расписание всех групп…</div><p>Это нужно один раз, несколько секунд.</p></div>`;
+    if(!dirLoading){dirLoading=true;try{await loadAll();buildDirs()}catch(e){b.innerHTML=`<div class="empty"><div class="em">Не удалось загрузить</div><p>Проверьте интернет и попробуйте снова.</p></div>`;dirLoading=false;return}dirLoading=false;renderPicker()}
+    return;
+  }
+  const src=pmode==="t"?PEOPLE:ROOMS;
+  if(!q){b.innerHTML=`<div class="empty"><div class="em">${pmode==="t"?"Введите фамилию":"Введите аудиторию"}</div><p>${pmode==="t"?`Например: Петров. В базе ${PEOPLE.size} преподавателей.`:`Например: 323, НУК или УЛК №3. В базе ${ROOMS.size} мест занятий.`}</p></div>`;return}
+  const words=q.split(/\s+/);
+  const res=[...src.entries()].filter(([k])=>{const lk=k.toLowerCase();return words.every(w=>lk.includes(w))})
+    .sort((a,c)=>(a[0].toLowerCase().startsWith(words[0])?0:1)-(c[0].toLowerCase().startsWith(words[0])?0:1)||c[1]-a[1]).slice(0,60);
+  b.innerHTML=res.length?`<div><div class="sec-l">Найдено: ${res.length}${res.length===60?"+":""}</div><div class="rlist">${res.map(([k,n])=>`<button class="ritem" data-subj="${esc(k)}"><b>${esc(k)}</b><span>${n} ${plural(n,"занятие","занятия","занятий")}</span></button>`).join("")}</div></div>`
+    :`<div class="empty"><div class="em">Ничего не нашлось</div><p>Попробуйте часть фамилии или номера.</p></div>`;
+}
+function showSubj(type,key){
+  closePicker();state.subj={type,key};subjCache.clear();window.scrollTo(0,0);
+  if(state.view==="week"){} renderMain();
+}
 function showWelcome(){
   PQ=$("#wq");PB=$("#wBody");pick={fac:null,course:null};
   document.querySelectorAll("header.top,main,body>.wrap").forEach(e=>e.hidden=true);
@@ -415,7 +508,7 @@ function showWelcome(){
 }
 function hideWelcome(){$("#welcome").hidden=true;document.querySelectorAll("header.top,main,body>.wrap").forEach(e=>e.hidden=false)}
 async function choose(fid,g){
-  closePicker();hideWelcome();window.scrollTo(0,0);
+  closePicker();hideWelcome();window.scrollTo(0,0);state.subj=null;
   state.fac=fid;state.group=g;store.set("sel",{f:fid,g});
   const favs=store.get("favs",[]).filter(x=>!(x.f===fid&&x.g===g));favs.unshift({f:fid,g});store.set("favs",favs.slice(0,6));
   try{history.replaceState(null,"","#g-"+slug(g))}catch(e){}
@@ -429,13 +522,19 @@ function findBySlug(s){for(const f of INDEX.faculties)for(const gs of Object.val
 $("#groupBtn").onclick=openPicker;$("#closeSheet").onclick=closePicker;
 $("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closePicker()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePicker();if($("#sheet").hidden&&state.group&&!/input|textarea/i.test(e.target.tagName)){if(e.key==="ArrowRight"){state.date=addDays(state.date,1);renderMain()}if(e.key==="ArrowLeft"){state.date=addDays(state.date,-1);renderMain()}}});
-$("#q").addEventListener("input",renderPicker);$("#wq").addEventListener("input",renderPicker);
+$("#q").addEventListener("input",renderPicker);
+document.querySelector(".ptabs").addEventListener("click",e=>{const b=e.target.closest("[data-pm]");if(b)setPmode(b.dataset.pm)});
+$("#daySub").addEventListener("click",e=>{
+  const sgb=e.target.closest("[data-sg]");if(sgb){store.set(sgKey(),+sgb.dataset.sg);renderMain();return}
+  if(e.target.closest("#backMine")){state.subj=null;renderMain()}
+});$("#wq").addEventListener("input",renderPicker);
 const pickClick=e=>{
   const t=e.target.closest("button");if(!t)return;
   if(t.dataset.fac){pick={fac:t.dataset.fac,course:null};renderPicker()}
   else if(t.dataset.back){pick={fac:null,course:null};renderPicker()}
   else if(t.dataset.course){pick.course=t.dataset.course;renderPicker()}
   else if(t.dataset.g) choose(t.dataset.f,t.dataset.g);
+  else if(t.dataset.subj) showSubj(pmode,t.dataset.subj);
 };
 $("#pickBody").addEventListener("click",pickClick);$("#wBody").addEventListener("click",pickClick);
 $("#days").addEventListener("click",e=>{const t=e.target.closest("[data-d]");if(!t)return;state.date=parseISO(t.dataset.d);if(state.view==="week"){state.view="day";store.set("view","day")}renderMain()});
