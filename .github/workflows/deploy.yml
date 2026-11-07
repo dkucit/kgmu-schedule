@@ -1,35 +1,49 @@
 name: Расписание КГМУ
 on:
   schedule:
-    - cron: "17 2,8,14 * * *"
+    - cron: "17 2,8,14 * * *"   # 05:17, 11:17, 17:17 по Москве
   workflow_dispatch:
   push:
     branches: [main]
+    paths-ignore: ["site/data/**", "bot/**", "**.md"]
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.d.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: unzip -o kgmu-schedule.zip -d app
-      - run: pip install openpyxl
+      - run: pip install -r requirements.txt
       - name: Свежее расписание с сайта КГМУ
-        working-directory: app
-        run: python scraper/build.py || echo "::warning::Сайт КГМУ недоступен, публикую данные из архива"
+        run: python scraper/build.py || echo "::warning::Сайт КГМУ недоступен, оставляю прошлые данные"
+      - name: Запасные данные из архива (если данных ещё нет)
+        run: |
+          if [ ! -f site/data/index.json ] && [ -f kgmu-schedule.zip ]; then unzip -o kgmu-schedule.zip 'site/data/*' -d . ; fi
+          test -f site/data/index.json
+      - run: python scraper/wrap.py
+      - name: Сохранить данные в репозиторий
+        run: |
+          git config user.name "schedule-bot"
+          git config user.email "schedule-bot@users.noreply.github.com"
+          git add site/data
+          git diff --cached --quiet || (git commit -m "Обновление расписания $(date -u +'%F %H:%M')" && git push)
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: app/site
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    steps:
       - id: d
         uses: actions/deploy-pages@v4
