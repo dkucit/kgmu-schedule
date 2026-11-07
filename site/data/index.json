@@ -1,0 +1,950 @@
+{
+ "updated": "2026-11-07T13:22:56+00:00",
+ "semester": "осенний семестр 2026/2027",
+ "weekStart": "2026-08-31",
+ "source": "https://kazangmu.ru/obuchenie/studentam/raspisanie-zanyatij",
+ "holidays": [
+  "2026-11-04",
+  "2026-12-31",
+  "2027-01-01",
+  "2027-01-02",
+  "2027-01-03",
+  "2027-01-04",
+  "2027-01-05",
+  "2027-01-06",
+  "2027-01-07",
+  "2027-01-08",
+  "2027-02-23",
+  "2027-03-08",
+  "2027-05-01",
+  "2027-05-09",
+  "2027-06-12"
+ ],
+ "faculties": [
+  {
+   "id": "lech",
+   "name": "Лечебное дело",
+   "sub": "Лечебный факультет",
+   "prog": "Лечебное дело",
+   "courses": {
+    "1": [
+     "1101",
+     "1102",
+     "1103",
+     "1104",
+     "1105",
+     "1106",
+     "1107",
+     "1108",
+     "1109",
+     "1110и"
+    ],
+    "2": [
+     "1201",
+     "1202",
+     "1203",
+     "1204",
+     "1205",
+     "1206",
+     "1207",
+     "1208",
+     "1209",
+     "1210",
+     "1211и",
+     "1212и"
+    ],
+    "3": [
+     "1301",
+     "1302",
+     "1303",
+     "1304",
+     "1305",
+     "1306",
+     "1307",
+     "1308",
+     "1309",
+     "1310и",
+     "1311и"
+    ],
+    "4": [
+     "1401",
+     "1402",
+     "1403",
+     "1404",
+     "1405",
+     "1406",
+     "1407",
+     "1408",
+     "1409",
+     "1410",
+     "1411",
+     "1412",
+     "1413",
+     "1414",
+     "1415",
+     "1416и",
+     "1417и",
+     "1418и"
+    ],
+    "5": [
+     "1501",
+     "1502",
+     "1503",
+     "1504",
+     "1505",
+     "1506",
+     "1507",
+     "1508",
+     "1509",
+     "1510",
+     "1511",
+     "1512",
+     "1513",
+     "1514",
+     "1515",
+     "1516и"
+    ],
+    "6": [
+     "1601",
+     "1602",
+     "1603",
+     "1604",
+     "1605",
+     "1606",
+     "1607",
+     "1608",
+     "1609",
+     "1610",
+     "1611",
+     "1612",
+     "1613",
+     "1614",
+     "1615",
+     "1616и"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/REAeKCJ7sKXJ4CA",
+     "lm": "Mon, 26 Oct 2026 01:08:02 GMT",
+     "fn": "o_26-27_lech_1.xlsx"
+    },
+    {
+     "label": "1103",
+     "url": "https://cloud.kazangmu.ru/index.php/s/pBYmzESSPei7ZJ2",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_1103_1-11.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/QqTtRsRfRbyn9sk",
+     "lm": "Mon, 26 Oct 2026 01:10:28 GMT",
+     "fn": "o_26-27_lech_2.xlsx"
+    },
+    {
+     "label": "1203",
+     "url": "https://cloud.kazangmu.ru/index.php/s/rfzjBHy7XZMiZQE",
+     "lm": "Tue, 03 Nov 2026 04:45:24 GMT",
+     "fn": "o_26-27_1203_1-11.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/8T4e5qs7peYBXCL",
+     "lm": "Mon, 26 Oct 2026 01:12:06 GMT",
+     "fn": "o_26-27_lech_3.xlsx"
+    },
+    {
+     "label": "1303",
+     "url": "https://cloud.kazangmu.ru/index.php/s/cSXYyox2qye9yZ4",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_1303_1-10.xlsx"
+    },
+    {
+     "label": "лекции 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/rJ9E46B4CSKBBQF",
+     "lm": "Mon, 26 Oct 2026 01:18:56 GMT",
+     "fn": "o_26-27_lech_4-6_lekc.xlsx"
+    },
+    {
+     "label": "циклы 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/tGNSKGDCNNGytHJ",
+     "lm": "Sun, 25 Oct 2026 22:36:20 GMT",
+     "fn": "o_26-27_lech_4-6_cycle.xlsx"
+    }
+   ],
+   "hash": "c41ce07d2b"
+  },
+  {
+   "id": "ped",
+   "name": "Педиатрия",
+   "sub": "Педиатрический факультет",
+   "prog": "Педиатрия",
+   "courses": {
+    "1": [
+     "2101",
+     "2102",
+     "2103",
+     "2104",
+     "2105",
+     "2106",
+     "2107"
+    ],
+    "2": [
+     "2201",
+     "2202",
+     "2203",
+     "2204",
+     "2205",
+     "2206",
+     "2207",
+     "2208и",
+     "2209и"
+    ],
+    "3": [
+     "2301",
+     "2302",
+     "2303",
+     "2304",
+     "2305",
+     "2306",
+     "2307",
+     "2308и"
+    ],
+    "4": [
+     "2401",
+     "2402",
+     "2403",
+     "2404",
+     "2405",
+     "2406",
+     "2407",
+     "2408",
+     "2409",
+     "2410",
+     "2411",
+     "2412и",
+     "2413и"
+    ],
+    "5": [
+     "2501",
+     "2502",
+     "2503",
+     "2504",
+     "2505",
+     "2506",
+     "2507",
+     "2508",
+     "2509",
+     "2510",
+     "2511"
+    ],
+    "6": [
+     "2601",
+     "2602",
+     "2603",
+     "2604",
+     "2605",
+     "2606",
+     "2607",
+     "2608",
+     "2609",
+     "2610",
+     "2611"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/NTGaqmZws6qPs8E",
+     "lm": "Mon, 26 Oct 2026 00:53:56 GMT",
+     "fn": "o_26-27_ped_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/HArAaRTSaXtMzCw",
+     "lm": "Mon, 26 Oct 2026 00:55:34 GMT",
+     "fn": "o_26-27_ped_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/2RTqo2qcRaB9MTf",
+     "lm": "Mon, 26 Oct 2026 00:57:18 GMT",
+     "fn": "o_26-27_ped_3.xlsx"
+    },
+    {
+     "label": "лекции 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/7nF6f4ZEaxp2oQe",
+     "lm": "Mon, 26 Oct 2026 01:02:46 GMT",
+     "fn": "o_26-27_ped_4-6_lekc.xlsx"
+    },
+    {
+     "label": "циклы 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/E4gxyqpzedx5Bdq",
+     "lm": "Sun, 25 Oct 2026 22:43:16 GMT",
+     "fn": "o_26-27_ped_4-6_cycle.xlsx"
+    }
+   ],
+   "hash": "30d8763cc9"
+  },
+  {
+   "id": "stom",
+   "name": "Стоматология",
+   "sub": "Стоматологический факультет",
+   "prog": "Стоматология",
+   "courses": {
+    "1": [
+     "4101",
+     "4102",
+     "4103",
+     "4104",
+     "4105",
+     "4106",
+     "4107и"
+    ],
+    "2": [
+     "4201",
+     "4202",
+     "4203",
+     "4204",
+     "4205",
+     "4206",
+     "4207и",
+     "4208и"
+    ],
+    "3": [
+     "4301",
+     "4302",
+     "4303",
+     "4304",
+     "4305",
+     "4306",
+     "4307",
+     "4308",
+     "4309",
+     "4310",
+     "4311",
+     "4312и"
+    ],
+    "4": [
+     "4401",
+     "4402",
+     "4403",
+     "4404",
+     "4405",
+     "4406",
+     "4407",
+     "4408",
+     "4409",
+     "4410",
+     "4411",
+     "4412и",
+     "4413и"
+    ],
+    "5": [
+     "4501",
+     "4502",
+     "4503",
+     "4504",
+     "4505",
+     "4506",
+     "4507",
+     "4508"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/ryqYmS3JrtTkJ24",
+     "lm": "Mon, 26 Oct 2026 00:42:10 GMT",
+     "fn": "o_26-27_stom_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/Y6wAjQKMp4H6RXW",
+     "lm": "Mon, 26 Oct 2026 00:19:14 GMT",
+     "fn": "o_26-27_stom_2.xlsx"
+    },
+    {
+     "label": "лекции 3-5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/GWyE3Tr8tG2XcPm",
+     "lm": "Mon, 26 Oct 2026 00:27:26 GMT",
+     "fn": "o_26-27_stom_3-5_lekc.xlsx"
+    },
+    {
+     "label": "циклы 3-5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/Kznp75kLPqCpc7D",
+     "lm": "Sun, 25 Oct 2026 22:49:40 GMT",
+     "fn": "o_26-27_stom_3-5_cycle.xlsx"
+    }
+   ],
+   "hash": "21a40731c2"
+  },
+  {
+   "id": "mpf",
+   "name": "Медико-профилактическое дело",
+   "sub": "Медико-профилактический факультет",
+   "prog": "Медико-профилактическое дело",
+   "courses": {
+    "1": [
+     "3101",
+     "3102",
+     "3103"
+    ],
+    "2": [
+     "3201",
+     "3202",
+     "3203"
+    ],
+    "3": [
+     "3301",
+     "3302"
+    ],
+    "4": [
+     "3401",
+     "3402",
+     "3403",
+     "3404"
+    ],
+    "5": [
+     "3501",
+     "3502",
+     "3503"
+    ],
+    "6": [
+     "3601",
+     "3602",
+     "3603"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/btHKoSnN3RDe9Ct",
+     "lm": "Mon, 26 Oct 2026 00:28:56 GMT",
+     "fn": "o_26-27_mpf_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/Q8tYd2DHPpt24mN",
+     "lm": "Mon, 26 Oct 2026 00:29:52 GMT",
+     "fn": "o_26-27_mpf_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/92MT9dfpQnbPrk7",
+     "lm": "Mon, 26 Oct 2026 00:30:58 GMT",
+     "fn": "o_26-27_mpf_3.xlsx"
+    },
+    {
+     "label": "лекции 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/4TtEdYQno8kZFBY",
+     "lm": "Mon, 26 Oct 2026 00:36:08 GMT",
+     "fn": "o_26-27_mpf_4-6_lekc.xlsx"
+    },
+    {
+     "label": "циклы 4-6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/CncY8Zb4LbkkQFe",
+     "lm": "Sun, 25 Oct 2026 22:38:54 GMT",
+     "fn": "o_26-27_mpf_4-6_cycle.xlsx"
+    }
+   ],
+   "hash": "1faf51ab78"
+  },
+  {
+   "id": "farm",
+   "name": "Фармация",
+   "sub": "Фармацевтический факультет",
+   "prog": "Фармация",
+   "courses": {
+    "1": [
+     "5101"
+    ],
+    "2": [
+     "5201",
+     "5203и"
+    ],
+    "3": [
+     "5301",
+     "5303и"
+    ],
+    "4": [
+     "5401",
+     "5403и"
+    ],
+    "5": [
+     "5501"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/Rcbdwk77TgBeKrf",
+     "lm": "Mon, 26 Oct 2026 00:04:54 GMT",
+     "fn": "o_26-27_farm_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/mBMSMHJzgwDcScz",
+     "lm": "Sun, 25 Oct 2026 23:06:56 GMT",
+     "fn": "o_26-27_farm_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/8wQgkFcT6pQTz6S",
+     "lm": "Thu, 29 Oct 2026 12:16:27 GMT",
+     "fn": "o_26-27_farm_3.xlsx"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/t9ddePRbGABzxAN",
+     "lm": "Sun, 25 Oct 2026 23:07:22 GMT",
+     "fn": "o_26-27_farm_4.xlsx"
+    },
+    {
+     "label": "5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/LLfD7F3q3WDFrBW",
+     "lm": "Sun, 25 Oct 2026 23:07:32 GMT",
+     "fn": "o_26-27_farm_5.xlsx"
+    }
+   ],
+   "hash": "226da68115"
+  },
+  {
+   "id": "mbf",
+   "name": "Медицинская биофизика",
+   "sub": "Медико-биологический факультет",
+   "prog": "Медицинская биофизика",
+   "courses": {
+    "1": [
+     "7101"
+    ],
+    "2": [
+     "7201"
+    ],
+    "3": [
+     "7301"
+    ],
+    "4": [
+     "7401"
+    ],
+    "5": [
+     "7501"
+    ],
+    "6": [
+     "7601"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/XFedpzbcSNaHKai",
+     "lm": "Sun, 25 Oct 2026 23:33:22 GMT",
+     "fn": "o_26-27_mbf_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/2EG88cHWS6q48ns",
+     "lm": "Sun, 25 Oct 2026 23:35:08 GMT",
+     "fn": "o_26-27_mbf_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/aLBqkWXKrqo3mWT",
+     "lm": "Sun, 25 Oct 2026 23:36:30 GMT",
+     "fn": "o_26-27_mbf_3.xlsx"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/XigbWmxp7GNQfZx",
+     "lm": "Sun, 25 Oct 2026 23:38:10 GMT",
+     "fn": "o_26-27_mbf_4.xlsx"
+    },
+    {
+     "label": "5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/JDAG6yKqREM2QsG",
+     "lm": "Sun, 25 Oct 2026 23:39:56 GMT",
+     "fn": "o_26-27_mbf_5.xlsx"
+    },
+    {
+     "label": "6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/8LFQmSHTFFJnocH",
+     "lm": "Sun, 25 Oct 2026 23:40:34 GMT",
+     "fn": "o_26-27_mbf_6.xlsx"
+    }
+   ],
+   "hash": "f88b3779b9"
+  },
+  {
+   "id": "mbh",
+   "name": "Медицинская биохимия",
+   "sub": "Медико-биологический факультет",
+   "prog": "Медицинская биохимия",
+   "courses": {
+    "1": [
+     "7102"
+    ],
+    "2": [
+     "7202"
+    ],
+    "3": [
+     "7302"
+    ],
+    "4": [
+     "7402"
+    ],
+    "5": [
+     "7502"
+    ],
+    "6": [
+     "7602"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/A6iP3fZLwM9BKqk",
+     "lm": "Sun, 25 Oct 2026 23:41:40 GMT",
+     "fn": "o_26-27_mbh_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/5EWd3D4WeFFLaW4",
+     "lm": "Sun, 25 Oct 2026 23:42:46 GMT",
+     "fn": "o_26-27_mbh_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/PPqka2k8KCcckFb",
+     "lm": "Sun, 25 Oct 2026 23:44:02 GMT",
+     "fn": "o_26-27_mbh_3.xlsx"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/RwGL34fyCZCt3RJ",
+     "lm": "Sun, 25 Oct 2026 23:45:18 GMT",
+     "fn": "o_26-27_mbh_4.xlsx"
+    },
+    {
+     "label": "5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/ZdkQTEExieAsnjs",
+     "lm": "Sun, 25 Oct 2026 23:46:22 GMT",
+     "fn": "o_26-27_mbh_5.xlsx"
+    },
+    {
+     "label": "6 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/RjacozjmmxZ242c",
+     "lm": "Sun, 25 Oct 2026 23:47:10 GMT",
+     "fn": "o_26-27_mbh_6.xlsx"
+    }
+   ],
+   "hash": "2bd6ab0dfd"
+  },
+  {
+   "id": "psy",
+   "name": "Психология",
+   "sub": "Бакалавриат",
+   "prog": "Психология(бакалавриат)",
+   "courses": {
+    "1": [
+     "П1126-1",
+     "П1126-2"
+    ],
+    "2": [
+     "П1225"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/S9fFXy8LjGNtqWn",
+     "lm": "Sun, 25 Oct 2026 23:18:44 GMT",
+     "fn": "o_26-27_psy_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/Xxs59iYNcFpAeF2",
+     "lm": "Sun, 25 Oct 2026 23:20:08 GMT",
+     "fn": "o_26-27_psy_2.xlsx"
+    }
+   ],
+   "hash": "bed6cfb7df"
+  },
+  {
+   "id": "vso",
+   "name": "Сестринское дело",
+   "sub": "Очная форма",
+   "prog": "Сестринское дело (очн.)",
+   "courses": {
+    "1": [
+     "8101"
+    ],
+    "2": [
+     "8201",
+     "8202и"
+    ],
+    "3": [
+     "8301",
+     "8302и"
+    ],
+    "4": [
+     "8401",
+     "8402"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/wGnm2nmnmRR8RP4",
+     "lm": "Sun, 25 Oct 2026 23:21:54 GMT",
+     "fn": "o_26-27_vso_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/fkfbQ62NpWqnTeR",
+     "lm": "Sun, 25 Oct 2026 23:23:32 GMT",
+     "fn": "o_26-27_vso_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/PLmLWFDrXM4sJm7",
+     "lm": "Sun, 25 Oct 2026 23:24:44 GMT",
+     "fn": "o_26-27_vso_3.xlsx"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/9dYpTmtrPTJ9EeC",
+     "lm": "Sun, 25 Oct 2026 23:25:58 GMT",
+     "fn": "o_26-27_vso_4.xlsx"
+    }
+   ],
+   "hash": "29ea535051"
+  },
+  {
+   "id": "vsoz",
+   "name": "Сестринское дело",
+   "sub": "Очно-заочная форма",
+   "prog": "Сестринское дело (о.-заочн.)",
+   "courses": {},
+   "pdfs": [
+    {
+     "label": "1 курс",
+     "course": 1,
+     "url": "https://cloud.kazangmu.ru/index.php/s/HKxMttmC6JNiFNM"
+    },
+    {
+     "label": "2 курс",
+     "course": 2,
+     "url": "https://cloud.kazangmu.ru/index.php/s/QgnCfiTYepixxyZ"
+    },
+    {
+     "label": "3 курс",
+     "course": 3,
+     "url": "https://cloud.kazangmu.ru/index.php/s/yC5qPp2GfYJPrbc"
+    },
+    {
+     "label": "4 курс",
+     "course": 4,
+     "url": "https://cloud.kazangmu.ru/index.php/s/sNXMtgpkox5Zqx8"
+    },
+    {
+     "label": "5 курс",
+     "course": 5,
+     "url": "https://cloud.kazangmu.ru/index.php/s/FRbA9JKsLwFFppr"
+    }
+   ],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/HKxMttmC6JNiFNM",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_8101_oz.pdf"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/QgnCfiTYepixxyZ",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_8201_oz.pdf"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/yC5qPp2GfYJPrbc",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_8301_oz.pdf"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/sNXMtgpkox5Zqx8",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_8401_oz.pdf"
+    },
+    {
+     "label": "5 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/FRbA9JKsLwFFppr",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_8501_oz.pdf"
+    }
+   ],
+   "hash": "9e52186dbb"
+  },
+  {
+   "id": "soc",
+   "name": "Социальная работа",
+   "sub": "Бакалавриат, очная",
+   "prog": "Социальная работа (бакалавриат, очн.)",
+   "courses": {
+    "1": [
+     "9101"
+    ],
+    "2": [
+     "9201"
+    ],
+    "3": [
+     "9301"
+    ],
+    "4": [
+     "9401"
+    ]
+   },
+   "pdfs": [],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/SAfDXY552BoCxRc",
+     "lm": "Sun, 25 Oct 2026 23:27:46 GMT",
+     "fn": "o_26-27_soc_1.xlsx"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/X2xcGbw6yoXA6Q8",
+     "lm": "Sun, 25 Oct 2026 23:28:50 GMT",
+     "fn": "o_26-27_soc_2.xlsx"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/5pxagnyAagtJLF3",
+     "lm": "Sun, 25 Oct 2026 23:30:38 GMT",
+     "fn": "o_26-27_soc_3.xlsx"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/KSktxw4JxmBmS4d",
+     "lm": "Sun, 25 Oct 2026 23:31:50 GMT",
+     "fn": "o_26-27_soc_4.xlsx"
+    }
+   ],
+   "hash": "a8f031ab86"
+  },
+  {
+   "id": "socz",
+   "name": "Социальная работа",
+   "sub": "Бакалавриат, заочная",
+   "prog": "Социальная работа (бакалавриат, заочн.)",
+   "courses": {},
+   "pdfs": [
+    {
+     "label": "2 курс",
+     "course": 2,
+     "url": "https://cloud.kazangmu.ru/index.php/s/DaEL88Kge4T3s9i"
+    },
+    {
+     "label": "4 курс",
+     "course": 4,
+     "url": "https://cloud.kazangmu.ru/index.php/s/jQj2TDS3AfgLQjt"
+    }
+   ],
+   "sources": [
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/DaEL88Kge4T3s9i",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_6201.pdf"
+    },
+    {
+     "label": "4 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/jQj2TDS3AfgLQjt",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_6401.pdf"
+    }
+   ],
+   "hash": "3563667496"
+  },
+  {
+   "id": "socm",
+   "name": "Социальная работа",
+   "sub": "Магистратура, заочная",
+   "prog": "Социальная работа (магистратура, заочн.)",
+   "courses": {},
+   "pdfs": [
+    {
+     "label": "2 курс",
+     "course": 2,
+     "url": "https://cloud.kazangmu.ru/index.php/s/5x7MeFqGYpXJqSJ"
+    }
+   ],
+   "sources": [
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/5x7MeFqGYpXJqSJ",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_6201m.pdf"
+    }
+   ],
+   "hash": "b5100d4080"
+  },
+  {
+   "id": "ozm",
+   "name": "Общественное здравоохранение",
+   "sub": "Магистратура, очно-заочная",
+   "prog": "Общественное здравоохранение (магистратура, о.-заочн.)",
+   "courses": {},
+   "pdfs": [
+    {
+     "label": "1 курс",
+     "course": 1,
+     "url": "https://cloud.kazangmu.ru/index.php/s/KLWdBpMyMcQyE5m"
+    },
+    {
+     "label": "2 курс",
+     "course": 2,
+     "url": "https://cloud.kazangmu.ru/index.php/s/dQTw6d5jJ6w9i7i"
+    },
+    {
+     "label": "3 курс",
+     "course": 3,
+     "url": "https://cloud.kazangmu.ru/index.php/s/PEdYxr8NFqnsMEL"
+    }
+   ],
+   "sources": [
+    {
+     "label": "1 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/KLWdBpMyMcQyE5m",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_10102.pdf"
+    },
+    {
+     "label": "2 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/dQTw6d5jJ6w9i7i",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_10202.pdf"
+    },
+    {
+     "label": "3 курс",
+     "url": "https://cloud.kazangmu.ru/index.php/s/PEdYxr8NFqnsMEL",
+     "lm": "Mon, 26 Oct 2026 09:33:51 GMT",
+     "fn": "o_26-27_10302.pdf"
+    }
+   ],
+   "hash": "6a0d5c587c"
+  }
+ ]
+}
