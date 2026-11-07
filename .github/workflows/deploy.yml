@@ -34,7 +34,8 @@ jobs:
           git config user.name "schedule-bot"
           git config user.email "schedule-bot@users.noreply.github.com"
           git add site/data
-          git diff --cached --quiet || (git commit -m "Обновление расписания $(date -u +'%F %H:%M')" && git push)
+          git diff --cached --quiet || git commit -m "Обновление расписания $(date -u +'%F %H:%M')"
+          git pull --rebase -X theirs origin main && git push || echo "::warning::Не удалось сохранить данные в репозиторий"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
