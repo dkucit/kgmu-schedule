@@ -1,0 +1,16 @@
+# systemd: sudo cp kgmu-bot.service /etc/systemd/system/ && sudo systemctl enable --now kgmu-bot
+[Unit]
+Description=Пары КГМУ — Telegram-бот
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/kgmu-bot
+EnvironmentFile=/opt/kgmu-bot/.env
+ExecStart=/opt/kgmu-bot/venv/bin/python bot.py
+Restart=always
+RestartSec=5
+User=kgmu
+
+[Install]
+WantedBy=multi-user.target
