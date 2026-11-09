@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T02:59:47+00:00",
+ "updated": "2026-11-09T09:24:26+00:00",
  "semester": "осенний семестр 2026/2027",
  "weekStart": "2026-08-31",
  "source": "https://kazangmu.ru/obuchenie/studentam/raspisanie-zanyatij",
@@ -138,6 +138,12 @@
      "fn": "o_26-27_1103_1-11.xlsx"
     },
     {
+     "label": "1103 12-17 неделя",
+     "url": "https://cloud.kazangmu.ru/index.php/s/GBEwZTryGXwnLxY",
+     "lm": "Mon, 09 Nov 2026 08:13:05 GMT",
+     "fn": "o_26-27_1103_12-17.xlsx"
+    },
+    {
      "label": "2 курс",
      "url": "https://cloud.kazangmu.ru/index.php/s/QqTtRsRfRbyn9sk",
      "lm": "Mon, 26 Oct 2026 01:10:28 GMT",
@@ -148,6 +154,12 @@
      "url": "https://cloud.kazangmu.ru/index.php/s/rfzjBHy7XZMiZQE",
      "lm": "Tue, 03 Nov 2026 04:45:24 GMT",
      "fn": "o_26-27_1203_1-11.xlsx"
+    },
+    {
+     "label": "1203 12-17 неделя",
+     "url": "https://cloud.kazangmu.ru/index.php/s/BTHZpM25xw4B2Lp",
+     "lm": "Mon, 09 Nov 2026 08:13:11 GMT",
+     "fn": "o_26-27_1203_12-17.xlsx"
     },
     {
      "label": "3 курс",
@@ -162,6 +174,12 @@
      "fn": "o_26-27_1303_1-10.xlsx"
     },
     {
+     "label": "1303 12-15 неделя",
+     "url": "https://cloud.kazangmu.ru/index.php/s/WneSyoZLNqW2FzE",
+     "lm": "Mon, 09 Nov 2026 08:13:17 GMT",
+     "fn": "o_26-27_1303_11-15.xlsx"
+    },
+    {
      "label": "лекции 4-6 курс",
      "url": "https://cloud.kazangmu.ru/index.php/s/rJ9E46B4CSKBBQF",
      "lm": "Mon, 26 Oct 2026 01:18:56 GMT",
@@ -174,7 +192,7 @@
      "fn": "o_26-27_lech_4-6_cycle.xlsx"
     }
    ],
-   "hash": "c41ce07d2b"
+   "hash": "d49c2833f9"
   },
   {
    "id": "ped",
@@ -449,11 +467,11 @@
     {
      "label": "циклы 4-6 курс",
      "url": "https://cloud.kazangmu.ru/index.php/s/CncY8Zb4LbkkQFe",
-     "lm": "Sun, 25 Oct 2026 22:38:54 GMT",
+     "lm": "Mon, 09 Nov 2026 08:13:28 GMT",
      "fn": "o_26-27_mpf_4-6_cycle.xlsx"
     }
    ],
-   "hash": "1faf51ab78"
+   "hash": "a0d68f3d37"
   },
   {
    "id": "farm",
