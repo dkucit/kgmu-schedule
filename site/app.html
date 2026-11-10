@@ -3,7 +3,7 @@
 <meta name="description" content="Расписание занятий Казанского ГМУ для всех факультетов и групп">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 /* Layout: одна колонка-«карта дня» шириной ~720px; липкая шапка с полосой недели; карточки пар с временной шкалой слева */
 :root{
@@ -198,6 +198,187 @@ a.maplink:hover{color:var(--accent)}
 .ritem b{font-weight:600;overflow-wrap:anywhere}
 .ritem span{color:var(--faint);font-size:12.5px;white-space:nowrap}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;box-shadow:var(--shadow)}
+
+/* ===== компактный вид (cx) ===== */
+:root{--cxbg:#EEF0FB;--cxink:#171A24;--cxmut:#5A6078;--cxacc:#4A3FD8;--cxline:rgba(90,96,120,.18);--gl1:rgba(255,255,255,.78);--gl2:rgba(255,255,255,.38);--glb:rgba(255,255,255,.75);--glhi:rgba(255,255,255,.95);--glsh:0 10px 30px rgba(60,64,150,.10);--chip:rgba(255,255,255,.7);--chipb:rgba(255,255,255,.9);--chipink:#4A5068;--bl1:#A98BFF;--bl2:#7FA2FF;--bl3:#FFC48A;--bl4:#FF9FD0;--blo:.75;--hero:linear-gradient(140deg,#8E6BFF 0%,#5560F5 45%,#2F7BF0 100%);--heroSh:0 18px 40px rgba(85,96,245,.42);--brk:#9A4A0F;--brkbg:rgba(255,224,190,.75);--okd:#22C17A;--bad:#C0255E}
+:root[data-theme="dark"]{--cxbg:#0A0B12;--cxink:#F2F3F8;--cxmut:#A3A8BE;--cxacc:#C9BEFF;--cxline:rgba(255,255,255,.12);--gl1:rgba(255,255,255,.11);--gl2:rgba(255,255,255,.03);--glb:rgba(255,255,255,.10);--glhi:rgba(255,255,255,.16);--glsh:0 12px 32px rgba(0,0,0,.45);--chip:rgba(255,255,255,.08);--chipb:rgba(255,255,255,.1);--chipink:#D4D7E4;--bl1:#6B4BFF;--bl2:#2F5BE6;--bl3:#FF8A3D;--bl4:#E0407A;--blo:.42;--hero:linear-gradient(140deg,#7B5BFF 0%,#4B55E8 45%,#2470E0 100%);--heroSh:0 18px 50px rgba(91,92,255,.5);--brk:#FFC58F;--brkbg:rgba(255,138,61,.16);--okd:#2BD98A;--bad:#FF7AA2}
+html.cxm,html.cxm body{background:var(--cxbg)}
+html.cxm body::before{background:var(--cxbg)}
+.cxm header.top,.cxm main.wrap,.cxm body>div.wrap{display:none!important}
+#cx{display:none;color:var(--cxink);font:15px/1.4 Inter,"Golos Text",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.cxm #cx{display:block}
+#cx button{font-family:inherit}
+.cx-bg{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.cx-bg i{position:absolute;border-radius:50%;filter:blur(50px);opacity:var(--blo);animation:cxdrift 18s ease-in-out infinite alternate}
+.cx-bg i:nth-child(1){width:320px;height:320px;left:-100px;top:-90px;background:var(--bl1)}
+.cx-bg i:nth-child(2){width:300px;height:300px;right:-120px;top:32%;background:var(--bl2);animation-duration:22s;animation-delay:-6s}
+.cx-bg i:nth-child(3){width:280px;height:280px;left:-70px;bottom:8%;background:var(--bl3);animation-duration:26s;animation-delay:-12s;opacity:calc(var(--blo)*.7)}
+.cx-bg i:nth-child(4){width:220px;height:220px;right:-50px;bottom:-70px;background:var(--bl4);opacity:calc(var(--blo)*.6)}
+@keyframes cxdrift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-24px) scale(1.12)}100%{transform:translate(-20px,30px) scale(.94)}}
+.cx-in{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-right,0px)) calc(110px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
+.gl{background:linear-gradient(135deg,var(--gl1),var(--gl2));-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);border:1px solid var(--glb);box-shadow:inset 0 1px 0 var(--glhi),var(--glsh)}
+.cx-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cx-who{display:flex;align-items:center;gap:12px;min-width:0;text-align:left;color:inherit}
+.cx-av{width:48px;height:48px;border-radius:50%;padding:2px;flex:none;background:conic-gradient(from 200deg,#7C5CF0,#2F7BF0,#FF8FC8,#FFB25B,#7C5CF0)}
+.cx-av b{width:100%;height:100%;border-radius:50%;background:var(--cxbg);display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--cxacc)}
+.cx-who small{display:block;font-size:13px;color:var(--cxmut)}
+.cx-who strong{display:flex;align-items:center;gap:6px;font-size:21px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.cx-who strong svg{width:14px;height:14px;opacity:.5;flex:none}
+.cx-ib{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;flex:none;color:var(--cxink);position:relative}
+.cx-ib svg{width:20px;height:20px}
+.cx-search{display:flex;align-items:center;gap:10px;border-radius:16px;padding:0 14px;min-height:46px;color:var(--cxmut);font-size:14px;width:100%;text-align:left}
+.cx-search svg{width:18px;height:18px;flex:none}
+.cx-hero{position:relative;overflow:hidden;border-radius:26px;padding:18px;color:#fff;background:var(--hero);box-shadow:var(--heroSh),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-hero.morn{background:linear-gradient(155deg,#D63F6C 0%,#A44BD8 55%,#5560F5 100%);box-shadow:0 18px 40px rgba(196,70,140,.38),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-hero.brk{background:linear-gradient(150deg,#B9531A 0%,#B8456E 55%,#6A4FE0 100%);box-shadow:0 18px 40px rgba(185,83,26,.32),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-hero.done{background:linear-gradient(150deg,#2B3A8C 0%,#4B3FA8 50%,#7A4FC8 100%)}
+.cx-hero.free{background:linear-gradient(150deg,#0B7A57 0%,#1C6FA0 55%,#4B55E8 100%);box-shadow:0 18px 40px rgba(28,111,160,.35),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-hero>*{position:relative}
+.cx-hero>.cx-glow,.cx-hero>.cx-sheen,.cx-hero>.cx-sun{position:absolute}
+.cx-glow{width:180px;height:180px;border-radius:50%;right:-50px;top:-70px;background:radial-gradient(circle,rgba(255,255,255,.35),rgba(255,255,255,0) 70%);pointer-events:none}
+.cx-sheen{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.25) 45%,rgba(255,255,255,0) 60%);background-size:250% 100%;animation:cxsheen 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes cxsheen{0%{background-position:120% 0}60%,100%{background-position:-60% 0}}
+.cx-sun{right:-36px;top:-40px;width:170px;height:170px;animation:cxrise 6s ease-in-out infinite alternate;pointer-events:none}
+@keyframes cxrise{0%{transform:translateY(8px) scale(.95);opacity:.85}100%{transform:translateY(-6px) scale(1.05);opacity:1}}
+.cx-pill{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 10px}
+.cx-pulse{width:7px;height:7px;border-radius:50%;background:#fff;animation:cxpulse 1.8s ease-out infinite}
+@keyframes cxpulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.75)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
+.cx-ht{display:flex;justify-content:space-between;gap:12px}
+.cx-col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cx-h1{font-size:21px;font-weight:800;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere}
+.cx-hs{font-size:13px;color:rgba(255,255,255,.9)}
+.cx-ring{position:relative;width:72px;height:72px;flex:none}
+.cx-ring svg{width:72px;height:72px;transform:rotate(-90deg)}
+.cx-ring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cx-ring b{font-size:18px;font-weight:800;line-height:1}.cx-ring span{font-size:10px;opacity:.9}
+.cx-next{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:9px 12px;font-size:13px}
+.cx-next span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-big{font-size:42px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.cx-seg{display:flex;gap:3px;height:8px;margin-top:16px}
+.cx-seg i{border-radius:4px;background:rgba(255,255,255,.45)}
+.cx-seg i.on{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.7)}.cx-seg i.gap{background:none}
+.cx-segl{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:rgba(255,255,255,.9);margin-top:6px}
+.cx-first{margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:18px;padding:10px 10px 10px 12px}
+.cx-first>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.cx-first small{font-size:11px;font-weight:600;opacity:.9}.cx-first b{font-size:15px;font-weight:800;overflow-wrap:anywhere}.cx-first span{font-size:12px;opacity:.9}
+.cx-route{min-height:44px;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:14px;background:#fff;color:#4B3FB8;font-size:13px;font-weight:800;text-decoration:none;flex:none;box-shadow:0 6px 14px rgba(30,20,80,.25)}
+.cx-route svg{width:16px;height:16px}
+.cx-bento{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cx-tile{border-radius:22px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cx-tl{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--cxmut)}
+.cx-tv{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.cx-ts{font-size:12px;color:var(--cxmut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-bars{display:flex;gap:4px;margin-top:3px}.cx-bars i{flex:1;height:6px;border-radius:3px;background:var(--cxline)}.cx-bars i.ok{background:var(--okd)}
+.cx-ki{width:40px;height:40px;border-radius:13px;flex:none;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--k1),var(--k2));box-shadow:0 6px 14px rgba(60,64,150,.22)}
+.cx-ki svg{width:20px;height:20px}
+.cx-ki.s{width:28px;height:28px;border-radius:9px}.cx-ki.s svg{width:15px;height:15px}
+.cx-sh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px}
+.cx-sh h2{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.cx-sh button{font-size:13px;font-weight:600;color:var(--cxacc)}
+.cx-rows{display:flex;flex-direction:column;gap:9px}
+.cx-row{border-radius:20px;padding:11px 14px;display:flex;align-items:center;gap:12px;color:inherit;text-align:left;width:100%}
+.cx-row>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.cx-row b{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-row>div>span{font-size:12px;color:var(--cxmut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-row .tm{font-size:14px;font-weight:800;flex:none;display:flex;flex-direction:column;align-items:flex-end}
+.cx-row .tm small{font-size:10px;font-weight:700;color:var(--bad)}
+.cx-banner{border-radius:18px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+.cx-banner>span{min-width:0;overflow-wrap:anywhere}
+.cx-btn{min-height:40px;padding:0 14px;border-radius:14px;font-weight:700;font-size:13px;background:var(--hero);color:#fff;box-shadow:0 6px 16px rgba(85,96,245,.35);display:inline-flex;align-items:center;gap:6px;justify-content:center;text-decoration:none;flex:none}
+.cx-btn svg{width:16px;height:16px}
+.cx-btn.g{background:var(--chip);color:var(--cxink);box-shadow:none;border:1px solid var(--chipb)}
+.cx-dh{border-radius:26px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.cx-dt{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.cx-dt h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.cx-dt p{margin:3px 0 0;font-size:13px;color:var(--cxmut)}
+.cx-sg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--cxline);flex:none}
+.cx-sg button{border-radius:999px;padding:0 11px;min-height:32px;font-size:12px;font-weight:600;color:var(--cxmut)}
+.cx-sg button[aria-pressed="true"]{background:var(--cxbg);color:var(--cxink);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.cx-wk{display:flex;align-items:center;gap:4px}
+.cx-wk>button{width:28px;height:52px;border-radius:12px;display:grid;place-items:center;color:var(--cxmut);flex:none}
+.cx-wk>button svg{width:18px;height:18px}
+.cx-days{flex:1;display:grid;gap:4px;min-width:0}
+.cx-d{border-radius:16px;padding:7px 0;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--cxmut)}
+.cx-d small{font-size:11px;font-weight:600;text-transform:uppercase}
+.cx-d b{font-size:17px;font-weight:800;color:var(--cxink)}
+.cx-d.t small{color:var(--cxacc);font-weight:800}
+.cx-d.off b{opacity:.45}
+.cx-d i{display:flex;gap:2px;height:4px}.cx-d i em{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.6}
+.cx-d.sel{background:var(--hero);color:#fff;box-shadow:0 8px 18px rgba(85,96,245,.45),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-d.sel b,.cx-d.sel small{color:#fff;opacity:1}.cx-d.sel i em{opacity:1}
+.cx-list{display:flex;flex-direction:column;gap:10px}
+.cx-slot{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px}
+.cx-tm{display:flex;flex-direction:column;align-items:flex-end;padding-top:13px;font-size:13px;font-weight:700}
+.cx-tm span{font-size:11px;font-weight:500;color:var(--cxmut)}
+.cx-cards{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cx-card{position:relative;overflow:hidden;border-radius:20px;padding:13px 14px 13px 18px;display:flex;flex-direction:column;gap:4px}
+.cx-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--k1),var(--k2))}
+.cx-card h3{margin:0;font-size:15px;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
+.cx-card .m{font-size:12px;color:var(--cxmut);overflow-wrap:anywhere}
+.cx-card .ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.cx-card .ch:empty{display:none}
+.cx-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--chipink);background:var(--chip);border:1px solid var(--chipb);border-radius:8px;padding:3px 8px;text-decoration:none;max-width:100%;overflow-wrap:anywhere}
+.cx-chip svg{width:11px;height:11px;flex:none}
+.cx-chip.w{color:var(--brk);background:var(--brkbg);border-color:transparent}
+.cx-card.past{opacity:.6}.cx-card.past h3{text-decoration:line-through;text-decoration-color:var(--cxline);padding-right:28px}
+.cx-chk{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:50%;background:var(--okd);color:#fff;display:grid;place-items:center}
+.cx-chk svg{width:12px;height:12px}
+.cx-card.live{color:#fff;background:var(--hero);border:0;box-shadow:var(--heroSh),inset 0 1px 0 rgba(255,255,255,.45)}
+.cx-card.live::before{display:none}
+.cx-card.live h3{padding-right:90px}
+.cx-card.live .m{color:rgba(255,255,255,.9)}
+.cx-card.live .cx-chip{color:#fff;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}
+.cx-pb{height:6px;border-radius:3px;background:rgba(255,255,255,.25);margin-top:6px}.cx-pb i{display:block;height:100%;border-radius:3px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8)}
+.cx-left{position:absolute;right:12px;top:12px;font-size:11px;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 8px}
+.cx-brk{display:flex;align-items:center;gap:8px;margin-left:56px;font-size:11px;font-weight:700;color:var(--brk)}
+.cx-brk::before,.cx-brk::after{content:"";flex:1;border-top:1.5px dashed var(--cxline)}
+.cx-brk span{background:var(--brkbg);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.cx-now{display:flex;align-items:center;gap:6px}
+.cx-now b{font-size:10px;font-weight:800;color:#fff;background:var(--hero);border-radius:999px;padding:3px 7px;box-shadow:0 4px 10px rgba(85,96,245,.4)}
+.cx-now i{width:9px;height:9px;border-radius:50%;background:#5560F5;border:2px solid var(--cxbg);animation:cxping 1.8s ease-out infinite;flex:none}
+.cx-now::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,#5560F5,rgba(124,92,240,0))}
+.cx-now span{font-size:11px;font-weight:700;color:var(--brk);white-space:nowrap}
+@keyframes cxping{0%{box-shadow:0 0 0 0 rgba(85,96,245,.55)}100%{box-shadow:0 0 0 12px rgba(85,96,245,0)}}
+.cx-empty{border-radius:24px;padding:32px 20px;text-align:center;color:var(--cxmut);font-size:14px}
+.cx-empty b{display:block;font-size:19px;font-weight:800;color:var(--cxink);margin-bottom:4px}
+.cx-nav{position:fixed;z-index:25;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(calc(100% - 28px),448px);height:68px;border-radius:28px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;padding:0 6px}
+:root[data-theme="dark"] .cx-nav{background:linear-gradient(135deg,rgba(30,32,48,.78),rgba(20,21,32,.6))}
+.cx-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:600;color:var(--cxmut);position:relative;min-height:56px}
+.cx-nav button svg{width:22px;height:22px}
+.cx-nav button[aria-current="page"]{color:var(--cxacc);font-weight:700}
+.cx-nav .fab{width:54px;height:54px;min-height:0;border-radius:20px;margin:0 auto;background:var(--hero);color:#fff;box-shadow:0 10px 24px rgba(85,96,245,.5),inset 0 1px 0 rgba(255,255,255,.5)}
+.cx-nav .bd{position:absolute;top:4px;left:50%;margin-left:6px;min-width:16px;height:16px;border-radius:8px;background:linear-gradient(135deg,#FF6B6B,#F0437A);color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;padding:0 4px}
+.cx-pt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cx-pt h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.cx-pt p{margin:0;color:var(--cxmut);font-size:13px}
+.cx-tabs{display:flex;gap:4px;padding:4px;border-radius:16px;overflow-x:auto}
+.cx-tabs button{flex:1;white-space:nowrap;padding:0 12px;min-height:36px;border-radius:12px;font-size:13px;font-weight:600;color:var(--cxmut)}
+.cx-tabs button[aria-pressed="true"]{background:var(--hero);color:#fff;box-shadow:0 4px 12px rgba(85,96,245,.35)}
+.cx-form{border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.cx-form label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;color:var(--cxmut)}
+.cx-form input,.cx-form textarea{font:500 16px Inter,system-ui,sans-serif;color:var(--cxink);background:var(--chip);border:1px solid var(--chipb);border-radius:12px;padding:11px 12px;outline:none;width:100%;box-sizing:border-box;color-scheme:inherit}
+.cx-form textarea{min-height:70px;resize:vertical}
+.cx-form .r{display:flex;gap:8px;justify-content:flex-end}
+.cx-task{border-radius:20px;padding:12px 12px 12px 14px;display:flex;gap:12px;align-items:flex-start}
+.cx-task>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.cx-task .ty{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;border-radius:6px;padding:3px 7px}
+.cx-task b{font-size:15px;font-weight:700;overflow-wrap:anywhere}
+.cx-task p{margin:0;font-size:13px;color:var(--cxmut);white-space:pre-wrap;overflow-wrap:anywhere}
+.cx-task .dd{font-size:12px;font-weight:700;color:var(--cxmut)}
+.cx-task .dd.u{color:var(--bad)}
+.cx-task.done{opacity:.55}.cx-task.done b{text-decoration:line-through}
+.cx-cb{width:26px;height:26px;border-radius:9px;border:2px solid var(--cxline);display:grid;place-items:center;flex:none;margin-top:1px;color:#fff}
+.cx-cb.on{background:var(--okd);border-color:var(--okd)}
+.cx-cb svg{width:14px;height:14px}
+.cx-x{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:var(--cxmut);flex:none}
+.cx-x svg{width:16px;height:16px}
+.cx-note{font-size:12px;color:var(--cxmut);text-align:center;padding:0 10px;margin:0}
+.cx-card2{border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.cx-card2 h3{margin:0;font-size:12px;font-weight:700;color:var(--cxmut);text-transform:uppercase;letter-spacing:.06em}
+.cx-card2 p{margin:0;font-size:13px;color:var(--cxmut)}
+.cx-line{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;flex-wrap:wrap}
+.cx-favs{display:flex;flex-wrap:wrap;gap:6px}
+.cx-foot{font-size:12px;color:var(--cxmut);display:flex;flex-direction:column;gap:6px;padding:0 4px}.cx-foot a{color:var(--cxacc)}
 </style>
 
 <section class="welcome" id="welcome" hidden>
@@ -221,6 +402,7 @@ a.maplink:hover{color:var(--accent)}
         <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
         <div style="min-width:0"><h1>Пары КГМУ</h1><small id="brandSub">Казанский ГМУ · расписание</small></div>
       </div>
+      <button class="icon-btn" id="toCx" title="Компактный вид" aria-label="Компактный вид"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></button>
       <button class="icon-btn" id="todayBtn" title="К сегодняшнему дню" aria-label="К сегодняшнему дню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></svg></button>
       <button class="chip" id="groupBtn" aria-label="Выбрать группу"><span class="g" id="groupLbl">Группа</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
     </div>
@@ -260,6 +442,8 @@ a.maplink:hover{color:var(--accent)}
     <div class="panel-b" id="pickBody"></div>
   </div>
 </div>
+
+<div id="cx"><div class="cx-bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="cx-in" id="cxMain"></div><nav class="cx-nav gl" id="cxNav" aria-label="Разделы"></nav></div>
 
 <script>
 (()=>{
@@ -503,10 +687,10 @@ function showSubj(type,key){
 }
 function showWelcome(){
   PQ=$("#wq");PB=$("#wBody");pick={fac:null,course:null};
-  document.querySelectorAll("header.top,main,body>.wrap").forEach(e=>e.hidden=true);
+  document.querySelectorAll("header.top,main,body>.wrap,#cx").forEach(e=>e.hidden=true);
   $("#welcome").hidden=false;renderPicker();
 }
-function hideWelcome(){$("#welcome").hidden=true;document.querySelectorAll("header.top,main,body>.wrap").forEach(e=>e.hidden=false)}
+function hideWelcome(){$("#welcome").hidden=true;document.querySelectorAll("header.top,main,body>.wrap,#cx").forEach(e=>e.hidden=false)}
 async function choose(fid,g){
   closePicker();hideWelcome();window.scrollTo(0,0);state.subj=null;
   state.fac=fid;state.group=g;store.set("sel",{f:fid,g});
@@ -565,6 +749,246 @@ function tgSync(fid,g){
   bar.hidden=false;
   $("#tgSub").onclick=()=>{store.set("botG",slug(g));bar.hidden=true;try{TG.openTelegramLink(`https://t.me/${bot}?start=g-${slug(g)}`)}catch(e){location.href=`https://t.me/${bot}?start=g-${slug(g)}`}};
 }
+
+/* ---------- компактный вид (дизайн E) ---------- */
+const IS_TG=!!TG;
+const SVG=(p,sw=1.9)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const P={home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',clock:'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',mod:'<path d="M12 3 3 8l9 5 9-5z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',gear:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',nav:'<path d="M3 11l18-8-8 18-2-8z"/>',chk:'<path d="M5 12l5 5 9-10"/>',cup:'<path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/>',l:'<path d="m15 18-6-6 6-6"/>',r:'<path d="m9 6 6 6-6 6"/>',plus:'<path d="M12 5v14M5 12h14"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21h4"/>',down:'<path d="m6 9 6 6 6-6"/>',flag:'<path d="M5 21V4h11l-2 4 2 4H5"/>'};
+const KC={lec:["#8EA6FF","#3D63F0"],pr:["#FFC86B","#FF8A3D"],cyc:["#B79CFF","#7C5CF0"],pe:["#6EE7B7","#10A97A"]};
+const KI={lec:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 21l4-5 4 5"/>',pr:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 14h9"/>',cyc:'<path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/>',pe:'<circle cx="13" cy="4.5" r="2"/><path d="M7 21l3-6 3 2v4M5 12l3-3 4 1 3 3 3 1"/>'};
+const TY={hw:["ДЗ","linear-gradient(135deg,#5B8CFF,#3D63F0)"],mod:["Модуль","linear-gradient(135deg,#9B7CFF,#6A4BE8)"],cr:["Зачёт","linear-gradient(135deg,#FF6F9A,#D63F6C)"]};
+const SUN='<svg class="cx-sun" viewBox="0 0 170 170" aria-hidden="true"><defs><radialGradient id="cxsg"><stop offset="0%" stop-color="#FFE3A3"/><stop offset="45%" stop-color="#FFB45E" stop-opacity=".9"/><stop offset="100%" stop-color="#FF8A5B" stop-opacity="0"/></radialGradient></defs><g stroke="rgba(255,226,170,.45)" stroke-width="3" stroke-linecap="round"><path d="M85 8v16M85 146v16M8 85h16M146 85h16M30 30l11 11M129 129l11 11M30 140l11-11M129 41l11-11"/></g><circle cx="85" cy="85" r="60" fill="url(#cxsg)"/><circle cx="85" cy="85" r="26" fill="#FFE7B0"/></svg>';
+let cxTab="home",cxForm=false,cxFType="hw",cxFilt="all",cxKey="";
+const isCx=()=>document.documentElement.classList.contains("cxm");
+const nowMin=()=>{const t=now();return t.getHours()*60+t.getMinutes()};
+const fmtDur=m=>m>=60?`${Math.floor(m/60)} ч${m%60?" "+m%60+" мин":""}`:`${m} мин`;
+const dShort=d=>`${DOW[(d.getDay()+6)%7].toLowerCase()}, ${d.getDate()} ${MON[d.getMonth()]}`;
+const isTom=d=>iso(d)===iso(addDays(now(),1));
+const kc=k=>KC[k]||KC.pr;
+const kVars=k=>`--k1:${kc(k)[0]};--k2:${kc(k)[1]}`;
+const kIco=(k,s)=>`<span class="cx-ki${s?" s":""}" style="${kVars(k)}" aria-hidden="true">${SVG(KI[k]||KI.pr,2)}</span>`;
+const kName=e=>(KIND[e.k]||"Занятие").toLowerCase();
+const roomChip=l=>{if(!l)return"";const u=mapUrl(l);return u?`<a class="cx-chip" href="${u}" target="_blank" rel="noopener" title="Открыть на карте">${SVG(P.pin,2.4)}${esc(l)}</a>`:`<span class="cx-chip">${esc(l)}</span>`};
+function nextDay(from){for(let i=1;i<=21;i++){const d=addDays(from,i),sl=slots(curEvents(d));if(sl.length)return{d,sl}}return null}
+/* задания (модули) — пока хранятся в браузере */
+const tKey=()=>"tasks."+state.fac+"."+state.group;
+const tasks=()=>store.get(tKey(),[]);
+const saveTasks=a=>store.set(tKey(),a);
+const daysTo=s=>Math.round((parseISO(s)-parseISO(iso(now())))/864e5);
+const dueTxt=n=>n<0?`просрочено на ${-n} ${plural(-n,"день","дня","дней")}`:n===0?"сегодня":n===1?"завтра":`через ${n} ${plural(n,"день","дня","дней")}`;
+const upcoming=()=>tasks().filter(t=>!t.done&&daysTo(t.date)>=0).sort((a,b)=>a.date.localeCompare(b.date));
+const subjects=()=>{const s=new Set();for(const e of FAC[state.fac]?.groups[state.group]?.ev||[])s.add(e.t);return [...s].sort()};
+const tasksFor=(d,t)=>tasks().filter(x=>!x.done&&x.date===iso(d)&&x.subj&&t&&x.subj.trim().toLowerCase()===String(t).trim().toLowerCase());
+/* тема */
+const mq=window.matchMedia?matchMedia("(prefers-color-scheme: dark)"):null;
+function applyTheme(){
+  const t=store.get("theme","auto");
+  const eff=t!=="auto"?t:(TG&&TG.colorScheme?TG.colorScheme:(mq&&mq.matches?"dark":"light"));
+  document.documentElement.dataset.theme=eff;
+  if(TG){try{const bg=isCx()?getComputedStyle(document.documentElement).getPropertyValue("--cxbg").trim():getComputedStyle(document.body).backgroundColor;TG.setHeaderColor&&TG.setHeaderColor(bg);TG.setBackgroundColor&&TG.setBackgroundColor(bg)}catch(e){}}
+}
+mq&&mq.addEventListener&&mq.addEventListener("change",()=>{if(store.get("theme","auto")==="auto")applyTheme()});
+try{TG&&TG.onEvent&&TG.onEvent("themeChanged",applyTheme)}catch(e){}
+/* общие куски */
+function cxSubjBar(){
+  if(!state.subj) return "";
+  return `<div class="cx-banner gl"><span>${state.subj.type==="t"?"Преподаватель":"Аудитория"}: <b>${esc(state.subj.key)}</b></span><button class="cx-btn g" data-act="mine">← Моя группа</button></div>`;
+}
+function cxTgBar(){
+  const bot=store.get("bot",null);
+  if(!TG||!bot||state.subj||store.get("botG",null)===slug(state.group)) return "";
+  return `<div class="cx-banner gl"><span>Получать пары группы <b>${esc(state.group)}</b> по утрам в боте</span><button class="cx-btn" data-act="tgsub">${SVG(P.bell,2)}Включить</button></div>`;
+}
+function tgSub(){
+  const bot=store.get("bot",null),g=state.group;if(!bot)return;
+  store.set("botG",slug(g));const u=`https://t.me/${bot}?start=g-${slug(g)}`;
+  try{TG?TG.openTelegramLink(u):window.open(u,"_blank")}catch(e){location.href=u}
+  renderCx();
+}
+function cxHead(){
+  const f=facOf(state.fac),h=now().getHours(),greet=h<5?"Доброй ночи":h<12?"Доброе утро":h<18?"Добрый день":"Добрый вечер";
+  const ini=(f?.name||"КГМУ").split(/[\s-]+/).filter(w=>w.length>2).slice(0,2).map(w=>w[0]).join("").toUpperCase()||"К";
+  let who=state.subj?state.subj.key:"Группа "+state.group; if(who.length>22) who=who.slice(0,21)+"…";
+  return `<div class="cx-hd"><button class="cx-who" data-act="pick" aria-label="Сменить группу"><span class="cx-av" aria-hidden="true"><b>${esc(ini)}</b></span><span style="min-width:0"><small>${greet} · ${dShort(now())}</small><strong>${esc(who)}${SVG(P.down,2.4)}</strong></span></button><button class="cx-ib gl" data-act="tab" data-tab="prof" aria-label="Настройки">${SVG(P.gear)}</button></div>
+  <button class="cx-search gl" data-act="pick">${SVG(P.search,2)}Группа, преподаватель, аудитория…</button>${cxSubjBar()}${cxTgBar()}`;
+}
+function firstBox(s,label){
+  const e=s.items[0],u=mapUrl(e.l);
+  return `<div class="cx-first"><div><small>${label} · ${kName(e)} · ${s.s}</small><b>${esc(e.t)}</b>${e.l?`<span>${esc(e.l)}</span>`:""}</div>${u?`<a class="cx-route" href="${u}" target="_blank" rel="noopener">${SVG(P.nav,2.2)}Маршрут</a>`:""}</div>`;
+}
+function rowSlot(s,d,extra){
+  const e=s.items[0];
+  const sub=[KIND[e.k]||"Занятие",e.sg?e.sg+" подгр.":"",e.l||""].filter(Boolean).join(" · ");
+  return `<button class="cx-row gl" data-act="day" data-d="${iso(d)}">${kIco(e.k)}<div><b>${esc(e.t)}${s.items.length>1?` +${s.items.length-1}`:""}</b><span>${esc(sub)}</span></div><div class="tm">${s.s}${extra?`<small>${extra}</small>`:""}</div></button>`;
+}
+function taskRows(){
+  const up=upcoming().filter(t=>daysTo(t.date)<=7).slice(0,3);
+  if(!up.length) return "";
+  return `<div class="cx-sh"><h2>Ближайшие задания</h2><button data-act="tab" data-tab="mod">Все ›</button></div><div class="cx-rows">${up.map(t=>{const n=daysTo(t.date);return `<button class="cx-row gl" data-act="tab" data-tab="mod"><span class="cx-ki" style="background:${TY[t.type][1]}" aria-hidden="true">${SVG(P.mod,2)}</span><div><b>${TY[t.type][0]} · ${esc(t.subj)}</b><span>${esc(t.note||dShort(parseISO(t.date)))}</span></div><div class="tm">${n===0?"сегодня":n===1?"завтра":dShort(parseISO(t.date)).split(", ")[1]}${n<=1?"<small>скоро</small>":""}</div></button>`}).join("")}</div>`;
+}
+/* главная */
+function cxHome(){
+  const t=now(),cur=nowMin(),sl=slots(curEvents(t));
+  const live=sl.find(s=>cur>=mins(s.s)&&cur<mins(s.e));
+  const rest=sl.filter(s=>mins(s.s)>cur),next=rest[0];
+  let h=cxHead(),hero="",bento="",list="";
+  if(live){
+    const e=live.items[0],len=mins(live.e)-mins(live.s),left=mins(live.e)-cur,C=182.2,off=(C*left/len).toFixed(1);
+    const rb=left>=60?`<b>${Math.floor(left/60)} ч</b><span>${left%60} мин</span>`:`<b>${left}</b><span>мин</span>`;
+    hero=`<section class="cx-hero"><div class="cx-glow"></div><div class="cx-sheen"></div><div class="cx-ht"><div class="cx-col"><span class="cx-pill"><span class="cx-pulse"></span>Сейчас · ${kName(e)}</span><div class="cx-h1">${esc(e.t)}${live.items.length>1?` <span style="opacity:.75">+${live.items.length-1}</span>`:""}</div><div class="cx-hs">${live.s} – ${live.e}${e.l?" · "+esc(e.l):""}</div></div><div class="cx-ring" role="img" aria-label="До конца пары ${fmtDur(left)}"><svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="29" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="7"/><circle cx="36" cy="36" r="29" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${off}"/></svg><div>${rb}</div></div></div>${next?`<div class="cx-next"><span>Далее: <b>${esc(next.items[0].t)}</b></span><b>${next.s}</b></div>`:`<div class="cx-next"><span>Это последняя пара сегодня</span></div>`}</section>`;
+  } else if(sl.length&&cur<mins(sl[0].s)){
+    const segs=sl.map((s,i)=>(i?`<i class="gap" style="flex:${Math.max(4,mins(s.s)-mins(sl[i-1].e))}"></i>`:"")+`<i class="${i?"":"on"}" style="flex:${Math.max(1,mins(s.e)-mins(s.s))}"></i>`).join("");
+    hero=`<section class="cx-hero morn">${SUN}<div class="cx-sheen"></div><div class="cx-col" style="gap:4px"><span class="cx-pill">Пары ещё не начались</span><span class="cx-hs" style="margin-top:8px">До первой пары</span><span class="cx-big">${fmtDur(mins(sl[0].s)-cur)}</span></div><div class="cx-seg" aria-hidden="true">${segs}</div><div class="cx-segl"><span>${sl[0].s}</span><span>${sl.length} ${plural(sl.length,"пара","пары","пар")}</span><span>${sl[sl.length-1].e}</span></div>${firstBox(sl[0],"Первая")}</section>`;
+  } else if(next){
+    hero=`<section class="cx-hero brk"><div class="cx-glow"></div><div class="cx-sheen"></div><div class="cx-col" style="gap:4px"><span class="cx-pill">${SVG(P.cup,2.2).replace("<svg ",'<svg width="13" height="13" ')}Перерыв</span><span class="cx-hs" style="margin-top:8px">До следующей пары</span><span class="cx-big">${fmtDur(mins(next.s)-cur)}</span></div>${firstBox(next,"Далее")}</section>`;
+  } else {
+    const nd=nextDay(t),lbl=nd?(isTom(nd.d)?"Завтра":dShort(nd.d))+" · первая":"";
+    hero=sl.length?`<section class="cx-hero done"><div class="cx-glow"></div><div class="cx-sheen"></div><div class="cx-col"><span class="cx-pill">${SVG(P.chk,2.6).replace("<svg ",'<svg width="13" height="13" ')}Пары закончились</span><div class="cx-h1">На сегодня всё</div><div class="cx-hs">Последняя закончилась в ${sl[sl.length-1].e}</div></div>${nd?firstBox(nd.sl[0],lbl):""}</section>`
+      :`<section class="cx-hero free"><div class="cx-glow"></div><div class="cx-sheen"></div><div class="cx-col"><span class="cx-pill">${(INDEX.holidays||[]).includes(iso(t))?"Праздничный день":"Выходной"}</span><div class="cx-h1">Сегодня пар нет</div><div class="cx-hs">Можно отдохнуть</div></div>${nd?firstBox(nd.sl[0],lbl):""}</section>`;
+    if(nd) list=`<div class="cx-sh"><h2>${isTom(nd.d)?"Завтра":DOW_FULL[(nd.d.getDay()+6)%7]+", "+nd.d.getDate()+" "+MON[nd.d.getMonth()]}</h2><button data-act="day" data-d="${iso(nd.d)}">Весь день ›</button></div><div class="cx-rows">${nd.sl.map(s=>rowSlot(s,nd.d)).join("")}</div>`;
+  }
+  if(live||(next&&cur>=mins(sl[0].s))){
+    let bt=null;for(let i=1;i<sl.length;i++){if(mins(sl[i].s)>cur&&mins(sl[i].s)-mins(sl[i-1].e)>=10){bt=[sl[i-1].e,sl[i].s];break}}
+    const tile1=bt?`<div class="cx-tile gl"><div class="cx-tl"><span class="cx-ki s" style="--k1:#FFD08A;--k2:#FF8A3D">${SVG(P.cup,2.2)}</span>Перерыв</div><div class="cx-tv">${fmtDur(mins(bt[1])-mins(bt[0]))}</div><div class="cx-ts">${bt[0]} – ${bt[1]}</div></div>`
+      :`<div class="cx-tile gl"><div class="cx-tl"><span class="cx-ki s" style="--k1:#B79CFF;--k2:#7C5CF0">${SVG(P.flag,2.2)}</span>Конец пар</div><div class="cx-tv">${sl[sl.length-1].e}</div><div class="cx-ts">через ${fmtDur(mins(sl[sl.length-1].e)-cur)}</div></div>`;
+    const done=sl.filter(s=>mins(s.e)<=cur).length;
+    const bars=sl.map(s=>mins(s.e)<=cur?'<i class="ok"></i>':(cur>=mins(s.s)?`<i style="background:linear-gradient(90deg,#5560F5 ${Math.round((cur-mins(s.s))/(mins(s.e)-mins(s.s))*100)}%,var(--cxline) 0)"></i>`:"<i></i>")).join("");
+    bento=`<div class="cx-bento">${tile1}<div class="cx-tile gl"><div class="cx-tl"><span class="cx-ki s" style="--k1:#7FE3B6;--k2:#22C17A">${SVG(P.chk,2.6)}</span>День</div><div class="cx-tv">${done} из ${sl.length}</div><div class="cx-bars" aria-hidden="true">${bars}</div></div></div>`;
+    if(rest.length) list=`<div class="cx-sh"><h2>Дальше сегодня</h2><button data-act="day" data-d="${iso(t)}">Весь день ›</button></div><div class="cx-rows">${rest.map(s=>rowSlot(s,t)).join("")}</div>`;
+  } else if(sl.length&&cur<mins(sl[0].s)){
+    list=`<div class="cx-sh"><h2>План на сегодня</h2><button data-act="day" data-d="${iso(t)}">Весь день ›</button></div><div class="cx-rows">${sl.map((s,i)=>rowSlot(s,t,i?"":"первая")).join("")}</div>`;
+  }
+  return h+hero+bento+taskRows()+list;
+}
+/* день */
+function cxCard(e,d,isT,cur){
+  const live=isT&&cur>=mins(e.s)&&cur<mins(e.e),past=isT&&cur>=mins(e.e);
+  const meta=[KIND[e.k]||"Занятие",e.sg?e.sg+" подгр.":""].filter(Boolean).join(" · ");
+  const tch=e.p&&state.subj?.type!=="t"?`<div class="m">${esc(e.p)}</div>`:"";
+  const grp=e._g?`<div class="m">${e._g.length>8?esc(e._g.slice(0,8).join(", "))+" и ещё "+(e._g.length-8):esc(e._g.join(", "))}</div>`:"";
+  const tk=state.subj?"":tasksFor(d,e.t).map(t=>`<span class="cx-chip w">${TY[t.type][0]}${t.note?": "+esc(t.note.length>40?t.note.slice(0,39)+"…":t.note):""}</span>`).join("");
+  const note=e.note?`<span class="cx-chip">${esc(e.note)}</span>`:"";
+  const pct=live?Math.round((cur-mins(e.s))/(mins(e.e)-mins(e.s))*100):0;
+  return `<article class="cx-card ${live?"live":"gl"}${past?" past":""}" style="${kVars(e.k)}">${live?`<div class="cx-sheen"></div><span class="cx-left">ещё ${fmtDur(mins(e.e)-cur)}</span>`:""}${past?`<span class="cx-chk" aria-label="Прошла">${SVG(P.chk,3)}</span>`:""}<h3>${esc(e.t)}</h3><div class="m">${meta}</div>${tch}${grp}<div class="ch">${roomChip(e.l)}${note}${tk}</div>${live?`<div class="cx-pb"><i style="width:${pct}%"></i></div>`:""}</article>`;
+}
+function cxDay(){
+  const d=state.date,m=monday(d),w=weekNo(d),T=now(),isT=iso(d)===iso(T),cur=nowMin();
+  const sl=slots(curEvents(d));
+  const wk=[0,1,2,3,4,5,6].map(i=>addDays(m,i));
+  const days=curEvents(wk[6]).length||d.getDay()===0?wk:wk.slice(0,6);
+  const chips=days.map(x=>{const n=slots(curEvents(x)).length;const cls=["cx-d",iso(x)===iso(d)?"sel":"",iso(x)===iso(T)?"t":"",n?"":"off"].join(" ");return `<button class="${cls}" data-act="date" data-d="${iso(x)}" aria-label="${DOW_FULL[(x.getDay()+6)%7]}, ${x.getDate()} ${MON[x.getMonth()]}"><small>${DOW[(x.getDay()+6)%7]}</small><b>${x.getDate()}</b><i>${"<em></em>".repeat(Math.min(n,5))}</i></button>`}).join("");
+  const sgB=!state.subj&&hasSg()?`<div class="cx-sg" role="group" aria-label="Подгруппа">${[[0,"Все"],[1,"1"],[2,"2"]].map(([v,t])=>`<button data-act="sg" data-sg="${v}" aria-pressed="${mySg()===v}">${t}</button>`).join("")}</div>`:"";
+  const title=(isT?"Сегодня":isTom(d)?"Завтра":DOW_FULL[(d.getDay()+6)%7])+`, ${d.getDate()} ${MON[d.getMonth()]}`;
+  const sub=[sl.length?`${sl.length} ${plural(sl.length,"пара","пары","пар")} · ${sl[0].s} – ${sl[sl.length-1].e}`:"Пар нет",w>=1?`${w} неделя`:"до начала семестра"].join(" · ");
+  let h=cxSubjBar()+`<section class="cx-dh gl"><div class="cx-dt"><div><h1>${title}</h1><p>${sub}</p></div>${sgB}</div><div class="cx-wk"><button data-act="wk" data-n="-7" aria-label="Предыдущая неделя">${SVG(P.l,2.2)}</button><div class="cx-days" style="grid-template-columns:repeat(${days.length},minmax(0,1fr))">${chips}</div><button data-act="wk" data-n="7" aria-label="Следующая неделя">${SVG(P.r,2.2)}</button></div></section>`;
+  if(!sl.length){
+    const hol=(INDEX.holidays||[]).includes(iso(d));
+    return h+`<div class="cx-empty gl"><b>${hol?"Праздничный день":d.getDay()===0?"Воскресенье":"Пар нет"}</b>${hol||d.getDay()===0?"Отдыхайте.":state.subj?"В этот день занятий нет.":"В этот день у группы "+esc(state.group)+" пар нет."}</div>`;
+  }
+  const hm=`${String(T.getHours()).padStart(2,"0")}:${String(T.getMinutes()).padStart(2,"0")}`;
+  let L="";
+  sl.forEach((s,i)=>{
+    if(i>0){const gap=mins(s.s)-mins(sl[i-1].e);
+      if(isT&&cur>=mins(sl[i-1].e)&&cur<mins(s.s)) L+=`<div class="cx-now"><b>${hm}</b><i></i><span>перерыв, ещё ${fmtDur(mins(s.s)-cur)}</span></div>`;
+      else if(gap>=15) L+=`<div class="cx-brk"><span>Перерыв ${fmtDur(gap)}</span></div>`;}
+    else if(isT&&cur<mins(s.s)) L+=`<div class="cx-now"><b>${hm}</b><i></i></div>`;
+    L+=`<div class="cx-slot"><div class="cx-tm">${s.s}<span>${s.e}</span></div><div class="cx-cards">${s.items.map(e=>cxCard(e,d,isT,cur)).join("")}</div></div>`;
+  });
+  return h+`<div class="cx-list">${L}</div>`;
+}
+/* модули */
+function cxTask(t){
+  const n=daysTo(t.date),ty=TY[t.type]||TY.hw;
+  return `<div class="cx-task gl${t.done?" done":""}"><button class="cx-cb${t.done?" on":""}" data-act="done" data-id="${esc(t.id)}" aria-pressed="${!!t.done}" aria-label="${t.done?"Вернуть в невыполненные":"Отметить выполненным"}">${t.done?SVG(P.chk,3):""}</button><div><span class="ty" style="background:${ty[1]}">${ty[0]}</span><b>${esc(t.subj)}</b>${t.note?`<p>${esc(t.note)}</p>`:""}<span class="dd${!t.done&&n<=1?" u":""}">${dShort(parseISO(t.date))}${t.done?"":" · "+dueTxt(n)}</span></div><button class="cx-x" data-act="del" data-id="${esc(t.id)}" aria-label="Удалить">${SVG(P.x,2.2)}</button></div>`;
+}
+function cxMods(){
+  const all=tasks(),flt=t=>cxFilt==="all"||t.type===cxFilt;
+  const act=all.filter(t=>!t.done&&flt(t)).sort((a,b)=>a.date.localeCompare(b.date));
+  const dn=all.filter(t=>t.done&&flt(t)).sort((a,b)=>b.date.localeCompare(a.date));
+  let h=`<div class="cx-hd"><div class="cx-pt"><h1>Модули</h1><p>Домашки, модули и зачёты группы ${esc(state.group)}</p></div>${cxForm?"":`<button class="cx-ib gl" data-act="add" aria-label="Добавить запись">${SVG(P.plus,2.2)}</button>`}</div>`;
+  h+=`<div class="cx-tabs gl" role="group" aria-label="Фильтр">${[["all","Все"],["hw","ДЗ"],["mod","Модули"],["cr","Зачёты"]].map(([k,t])=>`<button data-act="filt" data-f="${k}" aria-pressed="${cxFilt===k}">${t}</button>`).join("")}</div>`;
+  if(cxForm) h+=`<form class="cx-form gl" id="cxF"><div class="cx-tabs" role="group" aria-label="Тип записи" style="padding:0">${Object.entries(TY).map(([k,v])=>`<button type="button" data-act="ftype" data-t="${k}" aria-pressed="${cxFType===k}">${v[0]}</button>`).join("")}</div><label>Предмет<input name="subj" list="cxSubj" required autocomplete="off" placeholder="Например, анатомия человека"></label><datalist id="cxSubj">${subjects().map(s=>`<option value="${esc(s)}">`).join("")}</datalist><label>Дата<input name="date" type="date" required value="${iso(addDays(now(),1))}"></label><label>Что нужно сделать<textarea name="note" placeholder="Темы, номера заданий, что повторить"></textarea></label><div class="r"><button type="button" class="cx-btn g" data-act="cancel">Отмена</button><button type="submit" class="cx-btn">Сохранить</button></div></form>`;
+  if(!act.length&&!dn.length&&!cxForm) h+=`<div class="cx-empty gl"><b>Пока пусто</b>Добавьте домашнее задание, модуль или зачёт — здесь появится обратный отсчёт до него, а в расписании пометка у пары.<div style="margin-top:14px"><button class="cx-btn" data-act="add">${SVG(P.plus,2.4)}Добавить</button></div></div>`;
+  if(act.length) h+=`<div class="cx-rows">${act.map(cxTask).join("")}</div>`;
+  if(dn.length) h+=`<div class="cx-sh"><h2>Выполнено · ${dn.length}</h2></div><div class="cx-rows">${dn.map(cxTask).join("")}</div>`;
+  return h+`<p class="cx-note">Записи пока хранятся только на этом устройстве.</p>`;
+}
+/* профиль */
+function cxProf(){
+  const f=facOf(state.fac),th=store.get("theme","auto"),bot=store.get("bot",null);
+  const favs=store.get("favs",[]).filter(x=>facOf(x.f)&&!(x.f===state.fac&&x.g===state.group));
+  renderFoot();
+  let h=`<div class="cx-pt"><h1>Профиль</h1><p>Настройки расписания</p></div>`;
+  h+=`<section class="cx-card2 gl"><h3>Моя группа</h3><div class="cx-line"><div><div style="font-size:24px;font-weight:800">${esc(state.group)}</div><div style="font-size:13px;color:var(--cxmut)">${esc(f?.name||"")} · ${groupCourse(state.fac,state.group)||"?"} курс</div></div><button class="cx-btn" data-act="pick">Сменить</button></div>${hasSg()?`<div class="cx-line"><span>Подгруппа</span><div class="cx-sg" role="group" aria-label="Подгруппа">${[[0,"Все"],[1,"1"],[2,"2"]].map(([v,t])=>`<button data-act="sg" data-sg="${v}" aria-pressed="${mySg()===v}">${t}</button>`).join("")}</div></div>`:""}${favs.length?`<div class="cx-favs">${favs.map(x=>`<button class="cx-btn g" data-act="grp" data-f="${esc(x.f)}" data-g="${esc(x.g)}">${esc(x.g)}</button>`).join("")}</div>`:""}</section>`;
+  h+=`<section class="cx-card2 gl"><h3>Чужое расписание</h3><div class="cx-favs"><button class="cx-btn g" data-act="pm" data-pm="t">${SVG(P.user)}Преподаватель</button><button class="cx-btn g" data-act="pm" data-pm="r">${SVG(P.pin)}Аудитория</button></div></section>`;
+  h+=`<section class="cx-card2 gl"><h3>Оформление</h3><div class="cx-line"><span>Тема</span><div class="cx-sg" role="group" aria-label="Тема">${[["auto","Авто"],["light","Светлая"],["dark","Тёмная"]].map(([k,t])=>`<button data-act="theme" data-v="${k}" aria-pressed="${th===k}">${t}</button>`).join("")}</div></div>${IS_TG?"":`<div class="cx-line"><span>Вид сайта</span><div class="cx-sg" role="group" aria-label="Вид сайта"><button aria-pressed="true">Компактный</button><button data-act="ext" aria-pressed="false">Расширенный</button></div></div>`}</section>`;
+  if(bot) h+=`<section class="cx-card2 gl"><h3>Telegram-бот</h3><p>Утром пришлёт пары на день и предупредит об изменениях.</p><div>${IS_TG?`<button class="cx-btn" data-act="tgsub">${SVG(P.bell,2)}Присылать для ${esc(state.group)}</button>`:`<a class="cx-btn" href="https://t.me/${esc(bot)}?start=g-${slug(state.group)}" target="_blank" rel="noopener">${SVG(P.bell,2)}Открыть бота</a>`}</div></section>`;
+  return h+`<div class="cx-foot">${$("#foot").innerHTML}</div>`;
+}
+/* навигация и отрисовка */
+function cxNav(){
+  const due=upcoming().filter(t=>daysTo(t.date)<=3).length;
+  const it=(tab,ic,lbl,ex="")=>`<button data-act="tab" data-tab="${tab}"${cxTab===tab?' aria-current="page"':""}>${SVG(P[ic])}${lbl}${ex}</button>`;
+  return it("home","home","Главная")+it("day","cal","Неделя")+`<button class="fab" data-act="today" aria-label="Расписание на сегодня">${SVG(P.clock,2.2)}</button>`+it("mod","mod","Модули",due?`<span class="bd">${due}</span>`:"")+it("prof","user","Профиль");
+}
+function renderCx(){
+  if(!INDEX||!state.group||!FAC[state.fac]) return;
+  const v={home:cxHome,day:cxDay,mod:cxMods,prof:cxProf}[cxTab]||cxHome;
+  $("#cxMain").innerHTML=v();
+  $("#cxNav").innerHTML=cxNav();
+}
+const renderExt=renderMain;
+renderMain=function(){
+  if(!isCx()) return renderExt();
+  const k=(state.subj?state.subj.type+state.subj.key:"")+"|"+state.fac+"|"+state.group;
+  if(k!==cxKey){if(cxKey&&(state.subj||cxTab==="prof"))cxTab=state.subj?"day":"home";cxKey=k}
+  renderCx();
+};
+function setMode(cx,persist){
+  document.documentElement.classList.toggle("cxm",cx);
+  if(persist&&!IS_TG) store.set("ui",cx?"cx":"ext");
+  applyTheme();
+  if(INDEX&&state.group&&FAC[state.fac]){renderMain();if(!cx)renderFoot()}
+  if(persist) window.scrollTo(0,0);
+}
+$("#cx").addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");if(!b)return;
+  const a=b.dataset.act,top=()=>window.scrollTo(0,0);
+  if(a==="tab"){cxTab=b.dataset.tab;cxForm=false;renderCx();top()}
+  else if(a==="today"){state.date=now();cxTab="day";renderCx();top()}
+  else if(a==="day"){state.date=parseISO(b.dataset.d);cxTab="day";renderCx();top()}
+  else if(a==="date"){state.date=parseISO(b.dataset.d);renderCx()}
+  else if(a==="wk"){state.date=addDays(state.date,+b.dataset.n);renderCx()}
+  else if(a==="sg"){store.set(sgKey(),+b.dataset.sg);renderCx()}
+  else if(a==="pick") openPicker();
+  else if(a==="pm"){openPicker();setPmode(b.dataset.pm)}
+  else if(a==="mine"){state.subj=null;renderMain()}
+  else if(a==="grp") choose(b.dataset.f,b.dataset.g);
+  else if(a==="theme"){store.set("theme",b.dataset.v);applyTheme();renderCx()}
+  else if(a==="ext") setMode(false,true);
+  else if(a==="tgsub") tgSub();
+  else if(a==="add"){cxForm=true;cxFType="hw";cxTab="mod";renderCx();setTimeout(()=>{const i=document.querySelector("#cxF input[name=subj]");i&&i.focus()},30)}
+  else if(a==="cancel"){cxForm=false;renderCx()}
+  else if(a==="ftype"){cxFType=b.dataset.t;b.parentNode.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))}
+  else if(a==="filt"){cxFilt=b.dataset.f;renderCx()}
+  else if(a==="done"){saveTasks(tasks().map(t=>t.id===b.dataset.id?{...t,done:!t.done}:t));renderCx()}
+  else if(a==="del"){const id=b.dataset.id,go=()=>{saveTasks(tasks().filter(t=>t.id!==id));renderCx()};if(TG&&TG.showConfirm)TG.showConfirm("Удалить запись?",ok=>{if(ok)go()});else if(confirm("Удалить запись?"))go()}
+});
+$("#cx").addEventListener("submit",e=>{
+  if(e.target.id!=="cxF")return;e.preventDefault();
+  const fd=new FormData(e.target),subj=String(fd.get("subj")||"").trim(),date=String(fd.get("date")||"");
+  if(!subj||!/^\d{4}-\d{2}-\d{2}$/.test(date))return;
+  const a=tasks();a.push({id:Date.now().toString(36),type:cxFType,subj,date,note:String(fd.get("note")||"").trim(),done:false});
+  saveTasks(a);cxForm=false;renderCx();
+});
+let cxTx=null,cxTy=0;
+$("#cxMain").addEventListener("touchstart",e=>{cxTx=e.touches[0].clientX;cxTy=e.touches[0].clientY},{passive:true});
+$("#cxMain").addEventListener("touchend",e=>{if(cxTx==null||cxTab!=="day")return;const dx=e.changedTouches[0].clientX-cxTx,dy=e.changedTouches[0].clientY-cxTy;cxTx=null;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5){state.date=addDays(state.date,dx<0?1:-1);renderCx()}},{passive:true});
+$("#toCx").onclick=()=>setMode(true,true);
+if(IS_TG) $("#toCx").hidden=true;
+const uiPref=store.get("ui",null);
+setMode(IS_TG||(uiPref?uiPref==="cx":window.innerWidth<760),false);
+setInterval(()=>{if(isCx()&&!cxForm&&state.group&&(cxTab==="home"||(cxTab==="day"&&iso(state.date)===iso(now()))))renderCx()},30000);
 
 /* ---------- boot ---------- */
 (async()=>{
