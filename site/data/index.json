@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T09:02:45+00:00",
+ "updated": "2026-11-10T15:02:05+00:00",
  "semester": "осенний семестр 2026/2027",
  "weekStart": "2026-08-31",
  "source": "https://kazangmu.ru/obuchenie/studentam/raspisanie-zanyatij",
@@ -301,11 +301,11 @@
     {
      "label": "циклы 4-6 курс",
      "url": "https://cloud.kazangmu.ru/index.php/s/E4gxyqpzedx5Bdq",
-     "lm": "Sun, 25 Oct 2026 22:43:16 GMT",
+     "lm": "Tue, 10 Nov 2026 11:22:23 GMT",
      "fn": "o_26-27_ped_4-6_cycle.xlsx"
     }
    ],
-   "hash": "30d8763cc9"
+   "hash": "623d93ddc3"
   },
   {
    "id": "stom",
