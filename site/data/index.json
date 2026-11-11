@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T09:07:47+00:00",
+ "updated": "2026-11-11T15:02:32+00:00",
  "semester": "осенний семестр 2026/2027",
  "weekStart": "2026-08-31",
  "source": "https://kazangmu.ru/obuchenie/studentam/raspisanie-zanyatij",
@@ -395,11 +395,11 @@
     {
      "label": "циклы 3-5 курс",
      "url": "https://cloud.kazangmu.ru/index.php/s/Kznp75kLPqCpc7D",
-     "lm": "Sun, 25 Oct 2026 22:49:40 GMT",
+     "lm": "Wed, 11 Nov 2026 09:30:17 GMT",
      "fn": "o_26-27_stom_3-5_cycle.xlsx"
     }
    ],
-   "hash": "21a40731c2"
+   "hash": "ec3145c118"
   },
   {
    "id": "mpf",
