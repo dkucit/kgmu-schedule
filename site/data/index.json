@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T09:18:01+00:00",
+ "updated": "2026-11-19T03:02:16+00:00",
  "semester": "осенний семестр 2026/2027",
  "weekStart": "2026-08-31",
  "source": "https://kazangmu.ru/obuchenie/studentam/raspisanie-zanyatij",
@@ -176,7 +176,7 @@
     {
      "label": "1303 12-15 неделя",
      "url": "https://cloud.kazangmu.ru/index.php/s/WneSyoZLNqW2FzE",
-     "lm": "Mon, 09 Nov 2026 08:13:17 GMT",
+     "lm": "Wed, 18 Nov 2026 11:12:24 GMT",
      "fn": "o_26-27_1303_11-15.xlsx"
     },
     {
@@ -192,7 +192,7 @@
      "fn": "o_26-27_lech_4-6_cycle.xlsx"
     }
    ],
-   "hash": "d49c2833f9"
+   "hash": "a77f15b598"
   },
   {
    "id": "ped",
